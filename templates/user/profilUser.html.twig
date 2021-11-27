@@ -3,129 +3,131 @@
 {% block title %}SnowTricks - Profil de {# {{ user.username }}  #} Pseudo{% endblock %}
 
 {% block body %}
-    <div class="container profileUser mt-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card-small cardUser">
-                    <div class="card-header pt-3 border-bottom text-center">
-                        <div class="mb-3 mx-auto">
-                            <img class="rounded-circle" src="/img/avatar.png" alt="Avatar" width="110"> 
+    <main>
+        <div class="container profileUser mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card-small cardUser">
+                        <div class="card-header pt-3 border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="/img/avatar.png" alt="Avatar" width="110"> 
+                            </div>
+                            <h4 class="mb-0">{# {{ user.username }}  #}Pseudo</h4>
+                            <span class="text-center d-block mb-2">{# {{ user.email }}  #}Mail user</span>
                         </div>
-                        <h4 class="mb-0">{# {{ user.username }}  #}Pseudo</h4>
-                        <span class="text-center d-block mb-2">{# {{ user.email }}  #}Mail user</span>
-                    </div>
-                    <span class="text-center d-block my-2">Date d'inscription</span>
-                    <span class="text-center d-block mb-2">dateCreateUser</span>
-                    {# {% if user.dateUpdate %} #}
-                        <span class="text-center d-block mb-2">Dernière mise à jour</span>
-                        <span class="text-center d-block mb-2">dateUpdateUser</span>
-                    {# {% endif %} #}
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                <div class="card-small cardUser">
-                    <div class="card-header border-bottom">
-                        <h6 class="m-0">Modifier votre compte</h6>
-                    </div>
-                    <div class="card-body p-0">
-                        <form action="/modifyUser" method="post">
-                            <div class="mt-4 text-center">
-                                <button type="submit" name="createFigure" class="btnValidate btnUserProfil mt-4">Modifier vos informations</button>
-                            </div>
-                        </form>
-                        <form action="/modifyPassword" method="post">
-                            <div class="mt-4 text-center">
-                                <button type="submit" name="createFigure" class="btnValidate btnUserProfil mt-4">Modifier votre mot de passe</button>
-                            </div>
-                        </form>
-                        <form action="/listComments" method="post">
-                            <div class="my-4 text-center">
-                                <button type="submit" name="createFigure" class="btnValidate btnUserProfil my-4">Afficher vos commentaires</button>
-                            </div>
-                        </form>
+                        <span class="text-center d-block my-2">Date d'inscription</span>
+                        <span class="text-center d-block mb-2">dateCreateUser</span>
+                        {# {% if user.dateUpdate %} #}
+                            <span class="text-center d-block mb-2">Dernière mise à jour</span>
+                            <span class="text-center d-block mb-2">dateUpdateUser</span>
+                        {# {% endif %} #}
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-                <div class="card-small cardUser">
-                    <div class="card-header border-bottom">
-                        <h6 class="m-0">Liste des tricks créés</h6>
-                    </div>
-                    <div class="card-body p-0 bg-card">
-                        <div class="row containerTricksUser">
-                            {# {% for trick in pagingTrick.data %} #}
-                                <div class="col-lg-4 col-md-6 col-sm-12 my-4">
-                                    <div class="card-small card-post cardUser">
-                                        <div class="card-post-image">
-                                            <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
-                                        </div>
-                                        <div class="card-body profile">
-                                            <h5 class="card-title">
-                                                Titre trick {# {{ trick.title }} #}
-                                            </h5>
-                                            <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                            Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                            <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                            <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
-                                            <div class="mt-3">
-                                                <div class="text-center">
-                                                    <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
-                                                </div>
-                                            </div>                   
-                                        </div>
-                                    </div>
-                                </div>      
-                            {# {% endfor %} #}
-                            <div class="col-lg-4 col-md-6 col-sm-12 my-4">
-                                    <div class="card-small card-post cardUser">
-                                        <div class="card-post-image">
-                                            <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
-                                        </div>
-                                        <div class="card-body profile">
-                                            <h5 class="card-title">
-                                                Titre trick {# {{ trick.title }} #}
-                                            </h5>
-                                            <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                            Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                            <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                            <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
-                                            <div class="mt-3">
-                                                <div class="text-center">
-                                                    <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
-                                                </div>
-                                            </div>                   
-                                        </div>
-                                    </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+                    <div class="card-small cardUser">
+                        <div class="card-header border-bottom">
+                            <h6 class="m-0">Modifier votre compte</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <form action="/modifyUser" method="post">
+                                <div class="mt-4 text-center">
+                                    <button type="submit" name="createFigure" class="btnValidate btnUserProfil mt-4">Modifier vos informations</button>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 my-4">
-                                    <div class="card-small card-post cardUser">
-                                        <div class="card-post-image">
-                                            <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
+                            </form>
+                            <form action="/modifyPassword" method="post">
+                                <div class="mt-4 text-center">
+                                    <button type="submit" name="createFigure" class="btnValidate btnUserProfil mt-4">Modifier votre mot de passe</button>
+                                </div>
+                            </form>
+                            <form action="/listComments" method="post">
+                                <div class="my-4 text-center">
+                                    <button type="submit" name="createFigure" class="btnValidate btnUserProfil my-4">Afficher vos commentaires</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                    <div class="card-small cardUser">
+                        <div class="card-header border-bottom">
+                            <h6 class="m-0">Liste des tricks créés</h6>
+                        </div>
+                        <div class="card-body p-0 bg-card">
+                            <div class="row containerTricksUser">
+                                {# {% for trick in pagingTrick.data %} #}
+                                    <div class="col-lg-4 col-md-6 col-sm-12 my-4">
+                                        <div class="card-small card-post cardUser">
+                                            <div class="card-post-image">
+                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
+                                            </div>
+                                            <div class="card-body profile">
+                                                <h5 class="card-title">
+                                                    Titre trick {# {{ trick.title }} #}
+                                                </h5>
+                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
+                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
+                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
+                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
+                                                <div class="mt-3">
+                                                    <div class="text-center">
+                                                        <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
+                                                    </div>
+                                                </div>                   
+                                            </div>
                                         </div>
-                                        <div class="card-body profile">
-                                            <h5 class="card-title">
-                                                Titre trick {# {{ trick.title }} #}
-                                            </h5>
-                                            <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                            Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                            <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                            <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
-                                            <div class="mt-3">
-                                                <div class="text-center">
-                                                    <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
-                                                </div>
-                                            </div>                   
+                                    </div>      
+                                {# {% endfor %} #}
+                                <div class="col-lg-4 col-md-6 col-sm-12 my-4">
+                                        <div class="card-small card-post cardUser">
+                                            <div class="card-post-image">
+                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
+                                            </div>
+                                            <div class="card-body profile">
+                                                <h5 class="card-title">
+                                                    Titre trick {# {{ trick.title }} #}
+                                                </h5>
+                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
+                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
+                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
+                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
+                                                <div class="mt-3">
+                                                    <div class="text-center">
+                                                        <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
+                                                    </div>
+                                                </div>                   
+                                            </div>
                                         </div>
                                     </div>
-                                </div>      
+                                    <div class="col-lg-4 col-md-6 col-sm-12 my-4">
+                                        <div class="card-small card-post cardUser">
+                                            <div class="card-post-image">
+                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
+                                            </div>
+                                            <div class="card-body profile">
+                                                <h5 class="card-title">
+                                                    Titre trick {# {{ trick.title }} #}
+                                                </h5>
+                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
+                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
+                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
+                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
+                                                <div class="mt-3">
+                                                    <div class="text-center">
+                                                        <button type="button" onclick="window.open('{{ path('trick') }}')" target="_blank" class="btnValidate">Consulter</button>
+                                                    </div>
+                                                </div>                   
+                                            </div>
+                                        </div>
+                                    </div>      
+                                </div>
                             </div>
+                        <div id="paging-tricks" class="card-footer paging border-top">
+                            {% include('/paging/pagingProfilTricks.html.twig') %}
+                            {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
                         </div>
-                    <div id="paging-tricks" class="card-footer paging border-top">
-                        {% include('/paging/pagingProfilTricks.html.twig') %}
-                        {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}
