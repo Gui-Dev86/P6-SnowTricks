@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row justify-content-center mt-5">         
+            <div class="col-10 col-md-4">
+                <h1 class="mb-5 text-center">Modifiez vos informations</h1>
+                <form class="mb-4" action="/modifyPassword" method="post">
+                    <div class="form-group">
+                        <label for="newLogin" class="labelForm" >Nouvel identifiant</label>
+                        <input type="text" name="newLogin" id="newLogin" class="form-control" placeholder="Nouvel identifiant" value="" required>
+                    </div>  
+                    <div class="form-group">
+                        <label for="newEmail" class="labelForm">Nouvel email</label>
+                        <input type="email" name="newEmail" id="newEmail" class="form-control" placeholder="Nouvel email" required>
+                    </div>
+                    <div class="form-group my-4 text-center">
+                        <button type="submit" class="btnValidate">Modifier</button>
+                    </div>
+                    <input type="hidden" id="modifyUserToken" name="modifyUser[_token]" value="????????????" />
+                </form>             
+            </div>
+        </div>
+    </main>
+{% endblock %}

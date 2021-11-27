@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="jumbotron jumbotron-fluid homeJumbotron"></div>                
+            <div class="col-12 col-md-8 offset-md-2 py-3 mb-3">
+                <div class="card-block position">
+                 {# {% if trick.idFig ==  app.user.id or app.user.role == 1 %} #}
+                    <div class="containerModify px-2">
+                        <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="img/crayon.png"></a>
+                        <a class="mb-2 mr-2" href=""><img src="img/poubelle.png"></a>
+                    </div>
+                    {# {% endif %} #}
+                    <img class="alignFigure" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}" alt"photo snowboarder">
+                    <div class="card-body">
+                        <ul class="alignFigure list-inline"> 
+                        
+                            <li class="list-inline-item">
+                                <p class="list-inline-item datasFigure mb-2">Auteur: </p>
+                            </li> | 
+                            
+                            <li class="list-inline-item">
+                                <p class="mb-2">Ajouté le: </p>
+                                </li>
+                            {# {% if trick.dateUpdateFig %} #}
+                                <li class="list-inline-item">
+                                    <p class="mb-2"><small>(modifié le:  {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} #})</small></p>
+                                </li>
+                            {# {% endif %} #} | 
+                            <li class="list-inline-item">
+                                <p class="list-inline-item mb-2">Catégorie: </p>
+                            </li> |
+                            <li class="list-inline-item">
+                                <p class="list-inline-item mb-2">Photo(s): </p>
+                            </li> |
+                            <li class="list-inline-item">
+                                <p class="list-inline-item mb-2">Vidéo(s): </p>
+                            </li> | 
+                            <li class="list-inline-item">
+                                <p class="list-inline-item mb-2">Commentaire(s): </p>
+                            </li>
+                        </ul>
+                    <div class="container displayBlock col-12">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="row">
+                                {# {% for images in images %} #}
+                                        <div class="col-4">
+                                            <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg" alt="photo snowboarder"></a>
+                                        </div>
+                                {# {% endfor %} #}
+                                    <div class="col-4">
+                                        <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg"></a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-5">
+                                <div id="carousel" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active" >
+                                            
+                                            <iframe class="medias videoHeight" src="https://www.youtube.com/embed/0Oez89EoE_c" allowfullscreen></iframe>
+                                            
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                                <span class="carousel-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Précédente</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                                <span class="carousel-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Suivante</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                <div id="paging-tricks" class="paging">
+                                    {% include('/paging/pagingMediasTricks.html.twig') %}
+                                    {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex displayNone my-3">
+                        <form action="listemedias">
+                            <button type="submit">Voir médias</button>
+                        </form>
+                    </div>
+                    <div class="container col-10 text-justify">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
+                        Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna. Curabitur vestibulum finibus leo, 
+                        sagittis maximus odio egestas quis. Praesent sagittis eros augue, sed blandit metus pharetra in.<br /><br />
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
+                        Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.</p>
+                    </div>
+                </div>
+            </div>
+            <form class="container flexNewComment col-10 col-md-8 my-3" action="validerComment" method="post">
+                <div class="col-12 col-md-8 form-group mt-3">
+                    <textarea class="form-control" id="comment" name="commentContent" rows="3"></textarea>
+                </div>
+                <div class="col-12 col-md-4 heightButton">
+                    <button class="btnValidate" type="submit">Laisser un commentaire</button>
+                </div>
+            </form>
+        {# {% for comment in comments %} #}
+                <div class="container flex col-12 col-md-8 mb-2 ">
+                    <div class="col-3 col-md-3">
+                        <a class="mb-2" href=""><img class="avatar" src="img/avatar.png"></a>
+                        <p>Autor</p>
+                    </div>
+                    <div class="col-9 col-md-9">
+                        <div class="container contComment">
+                            <div class="row">
+                                <p class="py-1 px-1 text-justify">TextComment</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {# {% endfor %} #}
+
+            <div class="container flex col-12 col-md-8 mb-2 ">
+                <div class="col-3 col-md-3">
+                    <a class="mb-2" href=""><img class="avatar" src="img/avatar.png"></a>
+                    <p>Autor</p>
+                </div>
+                <div class="col-9 col-md-9">
+                    <div class="container contComment">
+                        <div class="row">
+                            <p class="py-1 px-1 text-justify">TextComment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex my-3">
+                <form class="flex btnLoadComment" action="loadComment">
+                    <button class="flex btnValidate" type="submit">Voir plus</button>
+                </form>
+            </div>
+           
+        </div>
+    </main>
+{% endblock %}

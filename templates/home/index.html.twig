@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur SnowTricks !{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container col-12 homeJumbotron">
+            <div class="container col-12">
+                <h1 class="text-center font-weight-bold titleSite">SNOWTRICKS<br />la montagne ça vous gagne</h1>
+            </div>
+            <a href="#tricks">
+                <img class="topChevron" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAA8ElEQVRoge3YOw7CMBBF0bcJLNj/VuiSihQsBwoyTQTE9vxs6V0pEg0zOgRFYIAxxhhjbMoKgDuAZX8duXe12nsB8ADw2q8ngJt2aPTe47AojOneX8O8MaZ7z4Z5YUz31g6zxpjvXRuGybVB91Qp+4zWvYs1RIPpRZxCWm+x5mum3XX1XlCDcUdEYMIQnphwhAcmDWGJSUdImsfkpnyv+S9uzaeafieyMK6IKEwIwhsTipCsMSkIyQqTipC0mCEQUi9mKITU8y9vOITU8r97WIRUcxIyPEL6dzY1DUL6dlo4HUIq+BwSRJ8bM8YYY2zq3kHIKCH7FRG+AAAAAElFTkSuQmCC"/>
+            </a>   
+        </div>
+
+        <span class="tricksAnchor" id="tricks"></span>         
+        <div class="tricksContainer py-3">
+            <div class="row">
+                
+            {# {% for trick in tricks %} #}
+            
+                    <div class="trickCard mb-3">
+                        <div class="card-block">
+                            <img class="card-img-top rounded-top" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}">
+                            <div class="pt-1 px-2">
+                                <div class="cardTitre">
+                                    <p class="card-text"><small class="text-muted">
+                                        {# {% if trick.dateUpdateFig >  trick.dateFig %} #}
+                                            Mis à jour le {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} {% else %} #} Créé le {#  {{ trick.dateFig | date('d-m-Y') }} #}
+                                        {# {% endif %} #}
+                                        par <b>{#  {{ trick.autorFig }} #}</b>
+                                        </small>
+                                    </p>
+                                    <div class="flex mb-2">
+                                        <a class="font-weight-bold linkFigure" href="{{ path('trick') }}">Name figure {# {{ trick.titleFig }} #}</a>
+                                    {# {% if trick.idFig ==  app.user.id or app.user.role == 1 %} #}
+                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    {# {% endif %} #}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            {# {% endfor %} #}
+
+                    <div class="trickCard mb-3">
+                        <div class="card-block">
+                            <img class="card-img-top rounded-top" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}">
+                            <div class="pt-1 px-2">
+                                <div class="cardTitre">
+                                    <p class="card-text"><small class="text-muted">
+                                        {# {% if trick.dateUpdateFig >  trick.dateFig %} #}
+                                            Mis à jour le {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} {% else %} #} Créé le {#  {{ trick.dateFig | date('d-m-Y') }} #}
+                                        {# {% endif %} #}
+                                        par <b>{#  {{ trick.autorFig }} #}</b>
+                                        </small>
+                                    </p>
+                                    <div class="flex mb-2">
+                                        <a class="font-weight-bold linkFigure" href="{{ path('trick') }}">Name figure {# {{ trick.titleFig }} #}</a>
+                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trickCard mb-3">
+                        <div class="card-block">
+                            <img class="card-img-top rounded-top" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}">
+                            <div class="pt-1 px-2">
+                                <div class="cardTitre">
+                                    <p class="card-text"><small class="text-muted">
+                                        {# {% if trick.dateUpdateFig >  trick.dateFig %} #}
+                                            Mis à jour le {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} {% else %} #} Créé le {#  {{ trick.dateFig | date('d-m-Y') }} #}
+                                        {# {% endif %} #}
+                                        par <b>{#  {{ trick.autorFig }} #}</b>
+                                        </small>
+                                    </p>
+                                    <div class="flex mb-2">
+                                        <a class="font-weight-bold linkFigure" href="{{ path('trick') }}">Name figure {# {{ trick.titleFig }} #}</a>
+                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trickCard mb-3">
+                        <div class="card-block">
+                            <img class="card-img-top rounded-top" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}">
+                            <div class="pt-1 px-2">
+                                <div class="cardTitre">
+                                    <p class="card-text"><small class="text-muted">
+                                        {# {% if trick.dateUpdateFig >  trick.dateFig %} #}
+                                            Mis à jour le {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} {% else %} #} Créé le {#  {{ trick.dateFig | date('d-m-Y') }} #}
+                                        {# {% endif %} #}
+                                        par <b>{#  {{ trick.autorFig }} #}</b>
+                                        </small>
+                                    </p>
+                                    <div class="flex mb-2">
+                                        <a class="font-weight-bold linkFigure" href="{{ path('trick') }}">Name figure {# {{ trick.titleFig }} #}</a>
+                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trickCard mb-3">
+                        <div class="card-block">
+                            <img class="card-img-top rounded-top" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}">
+                            <div class="pt-1 px-2">
+                                <div class="cardTitre">
+                                    <p class="card-text"><small class="text-muted">
+                                        {# {% if trick.dateUpdateFig >  trick.dateFig %} #}
+                                            Mis à jour le {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} {% else %} #} Créé le {#  {{ trick.dateFig | date('d-m-Y') }} #}
+                                        {# {% endif %} #}
+                                        par <b>{#  {{ trick.autorFig }} #}</b>
+                                        </small>
+                                    </p>
+                                    <div class="flex mb-2">
+                                        <a class="font-weight-bold linkFigure" href="{{ path('trick') }}">Name figure {# {{ trick.titleFig }} #}</a>
+                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <form action="/loadTrick" method="post">
+                <div class="mt-4 text-center">
+                    <button type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger figures suivante</button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="#tricks">
+                    <img class="downChevron" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABAklEQVRoge2YwQ2DMAxF30gFtfvP0YYRQIzQHuBUpRAndhIqP4mr/T6E4ACO4ziO40QZgQkIwNDYRcwNmIH3fq3Ao6mRgG/5S4X4JX+JEGfyXYdIle8yhFS+qxC58l2EKJVvGkJLvkkIbfmqIazkq4SwljcNUUveJERtedUQreRVQozAUiiwKNUQnyc07vwK3BVrJT8JTXntmqchLOSrhRiwX6+mPabCwvOJvGaIECscKshrhXhpFpXKl/Y7XKY5R8PYC5uKyVFUcjgvkc/pp/Yt0JKX9BOPFEc/qDTlU/plz0OxX4QW8kf9iifSgW3beu4NrBnYtvTANlA6juM4zv/yAXkFcvKskIb1AAAAAElFTkSuQmCC"/>
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
