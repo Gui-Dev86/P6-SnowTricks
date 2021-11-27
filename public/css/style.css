@@ -198,9 +198,11 @@ main {
 }
 
 .titleSite {
-  font-size: 3rem;
-  padding-top: 13rem;
+  font-size: 5rem;
+  padding-top: 15rem;
   color: #212529;
+  padding-left: 7rem;
+  font-family: Shadows Into Light;
 }
 
 .iconeHome {
@@ -332,8 +334,9 @@ main {
   .btnModify { margin: 4px 4px 0 70%; }
 
   .titleSite {
-    font-size: 1rem;
+    font-size: 25px;
     padding-top: 5rem;
+    padding-left: 0;
   }
 
   .containerDatas {
