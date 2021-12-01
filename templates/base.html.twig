@@ -51,6 +51,11 @@
                                         <li class="li-item">
                                             <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('profilUser') }}">Gérer votre compte</a>
                                         </li>
+                                        {# {% if app.user.role === 1 %} #}
+                                            <li class="li-item">
+                                                <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('pageAdmin') }}">Administration</a>
+                                            </li>
+                                        {# {% else %} #}
                                         <li class="li-item">
                                             <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('logout') }}">Déconnexion</a>
                                         </li>
@@ -89,6 +94,11 @@
                                 <li class="nav-item linkBurger">
                                     <a class="nav-link font-weight-bold" href="{{ path('profilUser') }}">Gérer votre compte</a>
                                 </li>
+                                {# {% if app.user.role === 1 %} #}
+                                    <li class="nav-item linkBurger">
+                                        <a class="nav-link font-weight-bold" href="{{ path('pageAdmin') }}">Administration</a>
+                                    </li>
+                                {# {% else %} #}
                                 <li class="nav-item linkBurger">
                                     <a class="nav-link font-weight-bold" href="{{ path('logout') }}">Se déconnecter</a>
                                 </li>

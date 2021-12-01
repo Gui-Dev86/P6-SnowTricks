@@ -9,28 +9,37 @@
                 <h1 class="mb-5 text-center">Créer une nouvelle figure</h1>
                 
                 <form class="mb-4" action="/createTrick" method="post" enctype="multipart/form-data">
-
                     <div class="form-group">
                         <label for="title" class="labelForm">Titre</label>
                         <input type="text" class="form-control"  id="title" name="title" value="{% if title is defined %} {{ title }} {% endif %}">
                     </div>
-
                     <div class="form-group">
                         <label for="content" class="labelForm">Contenu</label>
                         <textarea type="text" class="form-control" rows="10" id="content" name="content">{% if content is defined %} {{ content }} {% endif %}</textarea>
                     </div>
                     <div class="form-group">
-                        <div class="form-group centerMobile">
-                            <p>Cliquez pour ajouter un média</p>
-                            {# {{ form_widget(form.upload) }} #}
-                            <input type="hidden" id="image-counter" value="0">
-                            <div class="form-group mt-2">
-                                <button type="button" class="btnValidate" id="add-image">Ajouter un média</button>
-                                <span class="counter-image text-danger"></span>
-                            </div>                                     
+                        <label for="uploadMainImage" class="labelForm">Image principale</label><br />
+                        <div class="btnValidate btnUpload">Upload
+                            <input type="file" class="hideUpload"
+                                id="uploadMainImage" name="uploadMainImage"
+                                accept="image/png, image/jpeg">
+                            </div>
+                    </div>
+                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une image au format png ou jpeg</p>
+                    <div class="form-group">
+                        <label for="uploadImage" class="labelForm">Gallerie d'images (facultatif)</label><br />
+                        <div class="btnValidate btnUpload">Upload
+                            <input type="file" multiple class="hideUpload"
+                                id="uploadImage" name="uploadImage"
+                                accept="image/png, image/jpeg">
                         </div>
                     </div>
-                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une image au format png ou jpeg ou une vidéo Youtube</p>
+                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une image au format png ou jpeg, vous pouvez en sélectionner plusieurs à la fois</p>
+                    <div class="form-group">
+                        <label for="title" class="labelForm">Vidéo (facultatif)</label>
+                        <input type="text" class="form-control"  id="title" name="title" value="{% if upload is defined and type == 0 %} {{ path }} {% endif %}">
+                    </div>
+                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une vidéo Youtube</p>
                     <label for="category" class="labelForm">Catégorie</label><br />
                     <select name="category" id="category">
                         <option value="">Grab</option>

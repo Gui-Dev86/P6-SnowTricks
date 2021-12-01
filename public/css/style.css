@@ -1,6 +1,11 @@
 main {
   margin: 0;
-  min-height: 75vh;
+  min-height: 83vh;
+  overflow-x: hidden;
+}
+
+.flex {
+  display: flex;
 }
 
 .position {
@@ -308,6 +313,88 @@ main {
   margin: 5px;
 }
 
+.btnUpload {
+  width:7rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hideUpload {
+  position:absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.adminMain {
+  background: no-repeat top center url("../img/snowboardAdmin.jpg");
+  width: 100%;
+  background-size: cover;
+  height: 41rem;
+}
+
+.titleAdmin {
+  font-size: 7rem;
+  padding-top: 13rem;
+  color: #212529;
+  text-align: center;
+  font-family: Shadows Into Light;
+}
+
+.containerMenuAdmin {
+  background-color: rgba(0,0,0,.03);
+  border-right: 1px SOLID rgba(0,0,0,.125);
+  padding: 0 !important;
+}
+
+.adminNav {
+  list-style: none;
+  padding: 0;
+}
+
+.linkMenuAdmin:hover {
+  color: #212529;
+  background-color: #EF8923;
+}
+
+.columnEnd {
+  padding-right: 25px;
+}
+
+.tableAdmin {
+  min-height: 33rem;
+  border: 1px SOLID rgba(0,0,0,.125);
+  padding: 0 !important;
+}
+
+thead {
+  background-color: rgba(0,0,0,.03);
+}
+
+th,
+td {
+  width: 150px;
+  text-align: center;
+}
+
+table td,
+table th { text-align: left; }
+
+table td.l,
+table th.l { text-align: right; }
+
+table td.c,
+table th.c { text-align: center; }
+
+table td.r,
+table th.r { text-align: center; }
+
+.table100-head th {
+  font-size: 18px;
+  color: #fff;
+  font-weight: unset;
+}
+
 @media (max-width: 992px) {
   .trickCard {
     flex: 0 0 50%;
@@ -384,4 +471,28 @@ main {
   }
 
   .centerMobile { text-align: center; }
+
+  .adminMain { height: 13rem; }
+
+  .linkMenuAdminMobile {
+    background-color: #EF8923;
+    width: 130px;
+    padding: 5px 0;
+  }
+
+  .linkMenuAdminMobile:hover { background-color: #F7A943; }
+
+  .linkMobile { color: #212529; }
+
+  .linkMobile:hover { color: #212529; }
+
+  .containerAdminMobile {
+    border: 1px SOLID rgba(0,0,0,.125);
+    padding: 5px;
+  }
+
+  .titleAdmin {
+    font-size: 2rem;
+    padding-top: 5rem;
+  }
 }
