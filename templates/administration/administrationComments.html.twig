@@ -17,18 +17,16 @@
                                     <th class="column1 text-center">Figure</th>
                                     <th class="column2 text-center">Auteur</th>
                                     <th class="column3 text-center">Création</th>
-                                    <th class="column4 text-center">Mise à jour</th>
-                                    <th class="column5 columnEnd text-center">Supprimer</th>
+                                    <th class="column4 columnEnd text-center">Supprimer</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {# {% for user in users %} #}
                                 <tr>
-                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick') }}">Test{#{{ user.login_user }} #}</a></td>
+                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">Test{#{{ user.login_user }} #}</a></td>
                                     <td class="column2 text-center">Test{#{{ user.email_user }} #}</td>
                                     <td class="column3 text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    <td class="column4 text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
-                                    <td class="column5 columnEnd text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #} #}"><img src="img/poubelle.png"></a></td>                                    
+                                    <td class="column4 columnEnd text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #}"><img src="img/poubelle.png"></a></td>                                    
                                 </tr>
                             {# {% endfor %} #}
                             </tbody>
@@ -40,8 +38,8 @@
                             <div class="container col-12 col-md-8 offset-md-2">
                                 <table class="panel">
                                     <tr class="trCompte">
-                                        <td class="text-center">Titre:</td>
-                                        <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('trick') }}">{#{{ user.login_user }} #}Figure</a></td>
+                                        <td class="text-center">Figure:</td>
+                                        <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ user.login_user }} #}Figure</a></td>
                                     </tr>
                                     <tr class="trCompte">
                                         <td class="text-center">Auteur:</td>
@@ -50,14 +48,10 @@
                                     <tr class="trCompte">
                                         <td class="text-center">Création:</td>
                                         <td class="text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Mise à jour:</td>
-                                        <td class="text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
-                                    </tr>
+                                    </tr>                                  
                                     <tr class="trCompte">
                                         <td class="text-center">Supprimer:</td>
-                                        <td class="text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #} #}"><img src="img/poubelle.png"></a></td>                                    
+                                        <td class="text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #}"><img src="img/poubelle.png"></a></td>                                    
                                     </tr>
                                 </table>
                             </div>

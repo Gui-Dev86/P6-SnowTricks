@@ -9,97 +9,124 @@
                 <div class="card-block position">
                  {# {% if trick.idFig ==  app.user.id or app.user.role == 1 %} #}
                     <div class="containerModify px-2">
-                        <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="img/crayon.png"></a>
-                        <a class="mb-2 mr-2" href=""><img src="img/poubelle.png"></a>
+                        <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="{{ asset('img/crayon.png') }}"></a>
+                        <a class="mb-2 mr-2" href=""><img src="{{ asset('img/poubelle.png') }}"></a>
                     </div>
                     {# {% endif %} #}
-                    <img class="alignFigure" src="img/upload/snow1.jpg{# {{ trick.pathUpload }}#}" alt"photo snowboarder">
+                    <img class="alignFigure" src="{{ asset(trick.mainImage) }}" alt"photo snowboarder">
                     <div class="card-body">
-                        <ul class="alignFigure list-inline"> 
-                        
+                        <ul class="alignFigure list-inline">
                             <li class="list-inline-item">
-                                <p class="list-inline-item datasFigure mb-2">Auteur: </p>
+                                <p class="list-inline-item datasFigure mb-2">Auteur: <span class="font-weight-bold">{{ trick.user.username }}</span></p>
                             </li> | 
-                            
                             <li class="list-inline-item">
-                                <p class="mb-2">Ajouté le: </p>
-                                </li>
-                            {# {% if trick.dateUpdateFig %} #}
+                                <p class="mb-2">Ajouté le: {{ trick.dateCreateTrick | date('d-m-Y') }}</p>
+                            </li>
+                            {% if trick.dateUpdateTrick %}
                                 <li class="list-inline-item">
-                                    <p class="mb-2"><small>(modifié le:  {#  {{ trick.dateUpdatedateFig | date('d-m-Y') }} #})</small></p>
+                                    <p class="mb-2"><small>(modifié le: {{ trick.dateUpdateTrick | date('d-m-Y') }})</small></p>
                                 </li>
-                            {# {% endif %} #} | 
+                            {% endif %}
                             <li class="list-inline-item">
-                                <p class="list-inline-item mb-2">Catégorie: </p>
+                                <p class="list-inline-item mb-2">Catégorie: {{ trick.categories.nameCat }}</p>
                             </li> |
                             <li class="list-inline-item">
-                                <p class="list-inline-item mb-2">Photo(s): </p>
+                                <p class="list-inline-item mb-2">Photo(s): {{ trick.images | length }}</p>
                             </li> |
                             <li class="list-inline-item">
-                                <p class="list-inline-item mb-2">Vidéo(s): </p>
+                                <p class="list-inline-item mb-2">Vidéo(s): {{ trick.videos | length }}</p>
                             </li> | 
                             <li class="list-inline-item">
-                                <p class="list-inline-item mb-2">Commentaire(s): </p>
+                                <p class="list-inline-item mb-2">Commentaire(s): {{ trick.comments | length }}</p>
                             </li>
                         </ul>
-                    <div class="container displayBlock col-12">
-                        <div class="row">
-                            <div class="col-7">
-                                <div class="row">
-                                {# {% for images in images %} #}
-                                        <div class="col-4">
-                                            <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg" alt="photo snowboarder"></a>
-                                        </div>
-                                {# {% endfor %} #}
-                                    <div class="col-4">
-                                        <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg"></a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a class="mb-2" href=""><img class="medias" src="img/upload/snow1.jpg"></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-5">
-                                <div id="carousel" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active" >
-                                            
-                                            <iframe class="medias videoHeight" src="https://www.youtube.com/embed/0Oez89EoE_c" allowfullscreen></iframe>
-                                            
-                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                                <span class="carousel-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Précédente</span>
-                                            </a>
-                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                                <span class="carousel-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Suivante</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-7">
-                                <div id="paging-tricks" class="paging">
-                                    {% include('/paging/pagingMediasTricks.html.twig') %}
-                                    {# with {'route' : 'trick', 'paging' : pagingTrick} #}
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                    <div class="col-10 offset-1">                       
+                        <hr class="hrTop">                  
+                    </div>
+                    {% if (trick.images) or (trick.videos) %}
+                        <div class="container displayBlock col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="titleMedias">
+                                        <h4 class="pl-3">Nos images</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">                                              
+                                    <div id="carouselImages" class="carousel slide" data-interval="false">
+                                        <div class="carousel-inner">
+                                            {% for image in trick.images %}
+                                                <div class="carousel-item {% if loop.index0 == 0 %} active {% endif %}" > 
+                                                    <a class="mb-2" href="{{ asset(image.pathImage) }}"><img class="medias" src="{{ asset(image.pathImage) }}" alt="photo snowboarder"></a> 
+                                                </div>                                               
+                                            {% endfor %}                                       
+                                            <a class="carousel-control-prev" href="#carouselImages" role="button" data-slide="prev">                                               
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                    width="50" height="50"
+                                                    viewBox="0 0 172 172"
+                                                    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                </svg>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselImages" role="button" data-slide="next">                                              
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                    width="50" height="50"
+                                                    viewBox="0 0 172 172"
+                                                    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                </svg>                                    
+                                            </a>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="titleMedias">
+                                        <h4 class="pl-3">Nos vidéos</h4>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div id="carouselVideos" class="carousel slide" data-interval="false">
+                                        <div class="carousel-inner">
+                                            {% for video in trick.videos %}
+                                                <div class="carousel-item {% if loop.index0 == 0 %} active {% endif %}" >
+                                                    <iframe class="medias" src="{{ video.linkVideo }}" allowfullscreen></iframe>
+                                                </div>
+                                            {% endfor %}
+                                            <a class="carousel-control-prev" href="#carouselVideos" role="button" data-slide="prev">                                               
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                    width="50" height="50"
+                                                    viewBox="0 0 172 172"
+                                                    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                </svg>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselVideos" role="button" data-slide="next">                                              
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                    width="50" height="50"
+                                                    viewBox="0 0 172 172"
+                                                    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                </svg>                                    
+                                            </a>                                          
+                                        </div>
+                                    </div>
+                                </div><hr>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="container displayBlock col-12">
+                            <div class="row">
+                                <p>Il n'y a pas d'image ou de vidéo pour ce trick.</p>
+                            </div>
+                        </div>
+                    {% endif %}                  
                     <div class="flex displayNone my-3">
-                        <form action="listemedias">
-                            <button type="submit">Voir médias</button>
+                        <form action="{{ path('listMedias', {'id': trick.id}) }}">
+                            <button type="submit" class="btnValidate">Voir médias</button>
                         </form>
                     </div>
+                    <div class="col-10 offset-1">
+                        <hr>
+                    </div>
                     <div class="container col-10 text-justify">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                        Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna. Curabitur vestibulum finibus leo, 
-                        sagittis maximus odio egestas quis. Praesent sagittis eros augue, sed blandit metus pharetra in.<br /><br />
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                        Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.</p>
+                        <h5 class="mb-3 titleTrick">{{ trick.titleTrick }}</h5
+                        <p>{{ trick.contentTrick }}</p>
                     </div>
                 </div>
             </div>
@@ -111,42 +138,29 @@
                     <button class="btnValidate" type="submit">Laisser un commentaire</button>
                 </div>
             </form>
-        {# {% for comment in comments %} #}
+            {% for comment in trick.comments %}
                 <div class="container flex col-12 col-md-8 mb-2 ">
                     <div class="col-3 col-md-3">
-                        <a class="mb-2" href=""><img class="avatar" src="img/avatar.png"></a>
-                        <p>Autor</p>
+                        <a class="mb-2" href=""><img class="avatar" src="{{ asset(comment.user.avatar) }}"></a>
+                        <p>{{ comment.user.username }}</p>
                     </div>
                     <div class="col-9 col-md-9">
                         <div class="container contComment">
                             <div class="row">
-                                <p class="py-1 px-1 text-justify">TextComment</p>
+                                <p class="py-1 px-1 text-justify">{{ comment.contentCom }}</p>
                             </div>
                         </div>
+                        <p class="autorCom">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }}</p>
                     </div>
                 </div>
-        {# {% endfor %} #}
-
-            <div class="container flex col-12 col-md-8 mb-2 ">
-                <div class="col-3 col-md-3">
-                    <a class="mb-2" href=""><img class="avatar" src="img/avatar.png"></a>
-                    <p>Autor</p>
-                </div>
-                <div class="col-9 col-md-9">
-                    <div class="container contComment">
-                        <div class="row">
-                            <p class="py-1 px-1 text-justify">TextComment</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
+            {% if trick.comments | length > 10  %}
             <div class="flex my-3">
                 <form class="flex btnLoadComment" action="loadComment">
                     <button class="flex btnValidate" type="submit">Voir plus</button>
                 </form>
             </div>
-           
+           {% endif %}
         </div>
     </main>
 {% endblock %}

@@ -3,15 +3,36 @@
 {% block title %}SnowTricks - Commentaires de {# {{ user.username }}  #} Pseudo{% endblock %}
 
 {% block body %}
-    <div class="container profileUser mt-5">
-        <div class="row">
-            <div class="col-12 col-md-8 offset-md-2 mb-4">
-                <div class="cardUser card-small blog-comments">
-                    <div class="card-header border-bottom">
-                        <h6 class="m-0">Les commentaires de {# {{ user.username }}  #} Pseudo</h6>
-                    </div>
-                    <div class="card-body p-0">
-                        {# {% for comment in paging.data %} #}
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 mb-4">
+                    <div class="cardUser card-small blog-comments">
+                        <div class="card-header border-bottom">
+                            <h6 class="m-0">Les commentaires de {# {{ user.username }}  #} Pseudo</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            {# {% for comment in paging.data %} #}
+                                <div class="containerComment p-3">
+                                    <div class="">
+                                        <div class="text-muted">
+                                            <p>{# {{ user.username }}  #} Pseudo - Trick:
+                                            <a href="/trick/{# {{ comment.trick.id }}#{{ comment.id }} #}" target="_blank">Titre trick {# {{ comment.trick.title }} #}</a>
+                                            - Créé le: **/**/**{# {{ comment.trick.date }}  #} </p>
+                                        </div>
+                                        {# {% set consult = " <a target='_blank' href=/trick/" ~ comment.trick.id ~ "#" ~ comment.id ~">...</a>" %} #}
+                                        <p class="m-0 my-1 mb-2 text-muted text-justify">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            {# {{ comment.content|length > 50 ? comment.content|slice(0, 50) : comment.content }}{{ comment.content|length > 50 ? consult|raw }} #}
+                                        </p>
+                                        <form action="/trick" method="post">
+                                            <div class="mt-4 text-center">
+                                                <button type="submit" onclick="window.open('/trick/{#{{ comment.trick.id }}#{{ comment.id }}#}')" target="_blank" class="btnValidate">Consulter</button>
+                                            </div>
+                                        </form>                                
+                                    </div>
+                                </div>
+                            {# {% endfor %} #}
                             <div class="containerComment p-3">
                                 <div class="">
                                     <div class="text-muted">
@@ -23,41 +44,22 @@
                                     <p class="m-0 my-1 mb-2 text-muted text-justify">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         {# {{ comment.content|length > 50 ? comment.content|slice(0, 50) : comment.content }}{{ comment.content|length > 50 ? consult|raw }} #}
-                                    </p>
+                                    </p>                                  
                                     <form action="/trick" method="post">
                                         <div class="mt-4 text-center">
                                             <button type="submit" onclick="window.open('/trick/{#{{ comment.trick.id }}#{{ comment.id }}#}')" target="_blank" class="btnValidate">Consulter</button>
                                         </div>
-                                     </form>                                
+                                    </form>                                   
                                 </div>
-                            </div>
-                        {# {% endfor %} #}
-                        <div class="containerComment p-3">
-                            <div class="">
-                                <div class="text-muted">
-                                    <p>{# {{ user.username }}  #} Pseudo - Trick:
-                                    <a href="/trick/{# {{ comment.trick.id }}#{{ comment.id }} #}" target="_blank">Titre trick {# {{ comment.trick.title }} #}</a>
-                                    - Créé le: **/**/**{# {{ comment.trick.date }}  #} </p>
-                                </div>
-                                {# {% set consult = " <a target='_blank' href=/trick/" ~ comment.trick.id ~ "#" ~ comment.id ~">...</a>" %} #}
-                                <p class="m-0 my-1 mb-2 text-muted text-justify">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    {# {{ comment.content|length > 50 ? comment.content|slice(0, 50) : comment.content }}{{ comment.content|length > 50 ? consult|raw }} #}
-                                </p>                                  
-                                <form action="/trick" method="post">
-                                    <div class="mt-4 text-center">
-                                        <button type="submit" onclick="window.open('/trick/{#{{ comment.trick.id }}#{{ comment.id }}#}')" target="_blank" class="btnValidate">Consulter</button>
-                                    </div>
-                                </form>                                   
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer paging border-top">
-                        {% include('/paging/pagingListComments.html.twig') %}
-                        {# with {'route' : 'user_profile'} #}
+                        <div class="card-footer paging border-top">
+                            {% include('/paging/pagingListComments.html.twig') %}
+                            {# with {'route' : 'user_profile'} #}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}

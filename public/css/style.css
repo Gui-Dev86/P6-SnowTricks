@@ -4,10 +4,6 @@ main {
   overflow-x: hidden;
 }
 
-.flex {
-  display: flex;
-}
-
 .position {
   margin-top: -45rem;
   background-color: #fff;
@@ -56,6 +52,14 @@ main {
   z-index: 1;
 }
 
+.autorCom {
+  text-align: left;
+}
+
+.hrTop {
+  margin-top: -40px;
+}
+
 .linkFigure {
   color: #212529;
 }
@@ -75,9 +79,13 @@ main {
 }
 
 .medias {
+  height: 12rem;
   width: 100%;
   margin-bottom: 15px;
 }
+
+.carousel-control-prev,
+.carousel-control-next { opacity: 1 !important; }
 
 .displayBlock {
   display: block;
@@ -141,9 +149,11 @@ main {
   margin-right: 15px;
   border: 1px SOLID #212529;
 }
+
 .menuLink {
   font-size: 20px;
 }
+
 .separator {
   padding-top: 6px;
   font-size: 20px;
@@ -163,6 +173,12 @@ main {
 .linkLogin {
   color: #212529;
   text-decoration: none;
+}
+
+.titleMedias {
+ 
+  padding: 0.5rem 12rem 0.5rem 0.5rem;
+  background-color: #EF8923;
 }
 
 .labelForm {
@@ -214,6 +230,10 @@ main {
   width: 7%;
 }
 
+.trickImgHome {
+  height: 10rem;
+}
+
 .borderFooter {
   border-top: 1px SOLID #212529;
 }
@@ -254,12 +274,25 @@ main {
 .topChevron {
   float: right;
   margin-right: 35px;
-  margin-top: 20rem;
+  margin-top: 17rem;
 }
 
 .downChevron {
   float: right;
   margin-right: 35px;
+}
+
+.chevronPaging {
+  width: 50%;
+}
+
+.chevronRight {
+  transform: scaleX(-1);
+}
+
+.titleTrick {
+  color:#EF8923;
+  font-size: 25px;
 }
 
 .carousel-next-icon {
@@ -268,10 +301,6 @@ main {
   width: 20px;
   height:20px;
   display: inline-block;
-}
-
-.videoHeight {
-  min-height: 200px;
 }
 
 .cardUser {
@@ -495,4 +524,8 @@ table th.r { text-align: center; }
     font-size: 2rem;
     padding-top: 5rem;
   }
+
+  .medias { height: 6rem; }
+
+  .videosMobile { height: 8rem; }
 }

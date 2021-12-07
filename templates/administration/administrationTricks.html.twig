@@ -25,7 +25,7 @@
                             <tbody>
                             {# {% for user in users %} #}
                                 <tr>
-                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick') }}">Test{#{{ user.login_user }} #}</a></td>
+                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">Test{#{{ user.login_user }} #}</a></td>
                                     <td class="column2 text-center">Test{#{{ user.email_user }} #}</td>
                                     <td class="column3 text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
                                     <td class="column4 text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
@@ -43,7 +43,7 @@
                                 <table class="panel">
                                     <tr class="trCompte">
                                         <td class="text-center">Titre:</td>
-                                        <td class="text-center"><a class="nav-link  font-weight-bold" href="{{ path('trick') }}">{#{{ user.login_user }} #}Test</a></td>
+                                        <td class="text-center"><a class="nav-link  font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ user.login_user }} #}Test</a></td>
                                     </tr>
                                     <tr class="trCompte">
                                         <td class="text-center">Auteur:</td>

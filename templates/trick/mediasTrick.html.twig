@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container profileUser mt-4">
+            <div class="row">
+                {% if (trick.images) or (trick.videos) %}
+                        <div class="container col-12">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="titleMedias">
+                                        <h4 class="pl-3">Nos images</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% for image in trick.images %}
+                                    <div class="col-6">
+                                        <a class="mb-2" href="{{ asset(image.pathImage) }}"><img class="medias" src="{{ asset(image.pathImage) }}" alt="photo snowboarder"></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                             <div class="row">
+                                <div class="col-2">
+                                    <div class="titleMedias">
+                                        <h4 class="pl-3">Nos vidéos</h4>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                {% for video in trick.videos %}
+                                    <div class="col-10 offset-1">
+                                        <iframe class="medias videosMobile" src="{{ video.linkVideo }}" allowfullscreen></iframe>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="container col-12">
+                            <div class="row">
+                                <p>Il n'y a pas d'image ou de vidéo pour ce trick.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
