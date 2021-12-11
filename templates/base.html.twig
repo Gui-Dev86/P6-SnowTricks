@@ -33,37 +33,37 @@
                                     <li class="li-item">
                                         <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="/#tricks">Voir les figures</a>
                                     </li>
-                                    {# {% if app.user %} #}
-                                    <li class="li-item">
-                                        <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('createTrick') }}">Créer une figure</a>
-                                    </li>
-                                    {# {% endif %} #}
+                                    {% if app.user %}
+                                        <li class="li-item">
+                                            <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('createTrick') }}">Créer une figure</a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </li>
 
                             <li class="nav-item active">
                                 <p class="font-weight-bold separator"> | </p>
                             </li>
-                            {# {% if app.user %} #}
+                            {% if app.user %}
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link font-weight-bold dropdown-toggle menuLink" href="" role="button" data-toggle="dropdown" id="dropdownMenuLink" aria-expanded="false">Login{# {{ app.user['username'] }} #}</a>
+                                    <a class="nav-link font-weight-bold dropdown-toggle menuLink" href="" role="button" data-toggle="dropdown" id="dropdownMenuLink" aria-expanded="false">{{ app.user.username }}</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li class="li-item">
                                             <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('profilUser') }}">Gérer votre compte</a>
                                         </li>
-                                        {# {% if app.user.role === 1 %} #}
+                                        {% if app.user.roles.0 == "ROLE_ADMIN" %}
                                             <li class="li-item">
                                                 <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('pageAdmin') }}">Administration</a>
                                             </li>
-                                        {# {% else %} #}
+                                        {% endif %}
                                         <li class="li-item">
-                                            <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('logout') }}">Déconnexion</a>
+                                            <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('account_logout') }}">Déconnexion</a>
                                         </li>
                                     </ul>
                                 </li>
-                            {# {% else %} #}
+                            {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link menuLink font-weight-bold" href="{{ path('login') }}">S'authentifier</a>
+                                    <a class="nav-link menuLink font-weight-bold" href="{{ path('account_login') }}">S'authentifier</a>
                                 </li>
                                 <li class="nav-item active">
                                     <p class="font-weight-bold separator"> | </p>
@@ -71,7 +71,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link menuLink font-weight-bold" href="{{ path('register') }}">S'inscrire</a>
                                 </li>
-                            {# {% endif %} #}
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>
@@ -88,28 +88,31 @@
                                 <a class="nav-link font-weight-bold" href="/#tricks">Figures</a>
                             </li>
                             <li class="nav-item linkBurger">
-                                <a class="nav-link font-weight-bold" href="{{ path('createTrick') }}">Créer une figure</a>
+                                <a class="nav-link font-weight-bold" href="/#tricks">Voir les figures</a>
                             </li>
-                            {# {% if app.user %} #}
+                            {% if app.user %}
+                                <li class="nav-item linkBurger">
+                                    <a class="nav-link font-weight-bold" href="{{ path('createTrick') }}">Créer une figure</a>
+                                </li>
                                 <li class="nav-item linkBurger">
                                     <a class="nav-link font-weight-bold" href="{{ path('profilUser') }}">Gérer votre compte</a>
                                 </li>
-                                {# {% if app.user.role === 1 %} #}
+                                {% if app.user.roles.0 == "ROLE_ADMIN" %}
                                     <li class="nav-item linkBurger">
                                         <a class="nav-link font-weight-bold" href="{{ path('pageAdmin') }}">Administration</a>
                                     </li>
-                                {# {% else %} #}
+                                {% endif %}
                                 <li class="nav-item linkBurger">
-                                    <a class="nav-link font-weight-bold" href="{{ path('logout') }}">Se déconnecter</a>
+                                    <a class="nav-link font-weight-bold" href="{{ path('account_logout') }}">Se déconnecter</a>
                                 </li>
-                            {# {% else %} #}
+                            {% else %}
                                 <li class="nav-item linkBurger">
-                                    <a class="nav-link font-weight-bold" href="{{ path('login') }}">S'authentifier</a>
+                                    <a class="nav-link font-weight-bold" href="{{ path('account_login') }}">S'authentifier</a>
                                 </li>
                                 <li class="nav-item linkBurger">
                                     <a class="nav-link font-weight-bold" href="{{ path('register') }}">S'inscrire</a>
                                 </li>
-                            {# {% endif %} #}
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>

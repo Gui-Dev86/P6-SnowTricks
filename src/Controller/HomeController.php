@@ -4,14 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Repository\TricksRepository;
-use App\Repository\ImageRepository;
-use App\Repository\VideoRepository;
-use App\Repository\CommentsRepository;
-use App\Repository\CategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -44,10 +39,10 @@ class HomeController extends AbstractController
     /**
      * @Route("/trick/{id}", name="trick")
      */
-    public function trickShow($id, TricksRepository $repositoryTrick, CategoriesRepository $repositoryCategory, ImageRepository $repositoryImage, VideoRepository $repositoryVideo, CommentsRepository $repositoryComment, Request $request): Response
+    public function trickShow($id, TricksRepository $repositoryTrick): Response
     {
         $trick = $repositoryTrick->findOneById($id);
-        
+       
         return $this->render('trick/trick.html.twig', [
             'trick' => $trick,
         ]);

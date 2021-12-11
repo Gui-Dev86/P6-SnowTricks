@@ -19,7 +19,7 @@ class UserController extends AbstractController
     }
 
      /**
-     * @Route("/modifyUser", name="modifyUser")
+     * @Route("/modifyUser/{id}", name="modifyUser")
      */
     public function modifyUser(): Response
     {
@@ -29,7 +29,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/modifyPassword", name="modifyPassword")
+     * @Route("/modifyPassword/{id}", name="modifyPassword")
      */
     public function modifyPassword(): Response
     {
@@ -39,7 +39,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/listComments", name="listComments")
+     * @Route("/listComments/{id}", name="listComments")
      */
     public function listComments(): Response
     {

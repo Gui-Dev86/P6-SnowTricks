@@ -37,8 +37,15 @@ class AppFixtures extends Fixture
         {
             $user = new User();
 
-            $user->setUsername($faker->userName)
-                 ->setEmail($faker->safeEmail)
+            if($i == 0)
+                    {
+                        $user->setUsername('admin');
+                    }
+                    else
+                    {
+                        $user->setUsername($faker->userName);
+                    }
+                 $user->setEmail($faker->safeEmail)
                  ->setPassword($this->passwordHasher->hashPassword($user, 'azerty'))
                  ->setDateCreate($faker->dateTimeBetween('-6 months'))
                  ->setDateUpdate(new \Datetime);

@@ -8,7 +8,6 @@ use App\Repository\VideoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 class TricksController extends AbstractController
 {
@@ -37,7 +36,7 @@ class TricksController extends AbstractController
     /**
      * @Route("/listMedias/{id}", name="listMedias")
      */
-    public function listMedias($id, TricksRepository $repositoryTrick, ImageRepository $repositoryImage, VideoRepository $repositoryVideo, Request $request): Response
+    public function listMedias($id, TricksRepository $repositoryTrick): Response
     {
         $trick = $repositoryTrick->findOneById($id);
         

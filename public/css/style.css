@@ -4,6 +4,14 @@ main {
   overflow-x: hidden;
 }
 
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}
+
 .position {
   margin-top: -45rem;
   background-color: #fff;

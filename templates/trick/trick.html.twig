@@ -7,12 +7,12 @@
         <div class="jumbotron jumbotron-fluid homeJumbotron"></div>                
             <div class="col-12 col-md-8 offset-md-2 py-3 mb-3">
                 <div class="card-block position">
-                 {# {% if trick.idFig ==  app.user.id or app.user.role == 1 %} #}
+                 {% if trick.id ==  app.user.id or app.user.roles.0 == "ROLE_ADMIN" %} #}
                     <div class="containerModify px-2">
                         <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="{{ asset('img/crayon.png') }}"></a>
                         <a class="mb-2 mr-2" href=""><img src="{{ asset('img/poubelle.png') }}"></a>
                     </div>
-                    {# {% endif %} #}
+                    {% endif %}
                     <img class="alignFigure" src="{{ asset(trick.mainImage) }}" alt"photo snowboarder">
                     <div class="card-body">
                         <ul class="alignFigure list-inline">

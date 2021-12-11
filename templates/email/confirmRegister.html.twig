@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <h3>Félicitations {{ username }}, vous vous êtes enregistrés sur Snowtricks avec succès</h3>
+
+        <p>Il ne manque plus qu'une dernière étape avant de confirmer votre inscription.<br />
+        
+        Afin de valider votre compte veuillez valider votre email en cliquant sur le lien ci-dessous:<br /><br />
+        
+        <a href="{{ url('mailConfirmation', { id: id, token: token }) }}">{{address}}/mailConfirmation/{{id}}/{{token}}</a><br/><br/>
+        
+        Cordialement,<br />
+
+        Snowtricks.</p>
+    </body>
+</html>

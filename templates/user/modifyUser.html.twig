@@ -16,7 +16,15 @@
                         <label for="newEmail" class="labelForm">Nouvel email</label>
                         <input type="email" name="newEmail" id="newEmail" class="form-control" placeholder="Nouvel email" required>
                     </div>
-                    <div class="form-group my-4 text-center">
+                    <div class="form-group">
+                        <label for="newAvatar" class="labelForm">Nouvel avatar</label>
+                        <div class="btnValidate btnUpload">Upload
+                            <input type="file" multiple class="hideUpload"
+                                id="newAvatar" name="newAvatar"
+                                accept="image/png, image/jpeg">
+                        </div>
+                    </div>
+                    <div class="form-group my-5 text-center">
                         <button type="submit" class="btnValidate">Modifier</button>
                     </div>
                     <input type="hidden" id="modifyUserToken" name="modifyUser[_token]" value="????????????" />
