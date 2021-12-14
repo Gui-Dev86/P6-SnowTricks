@@ -78,7 +78,15 @@ ul {
 
 .alignFigure {
   width: 100%;
-  margin: -40px 0 40px 0;
+  margin-bottom: 40px;
+}
+
+.alignFigureAdmin {
+  margin-top: -40px;
+}
+
+.contTrick {
+  height: 8rem;
 }
 
 .alignMedia {
@@ -100,6 +108,10 @@ ul {
 }
 
 .displayNone {
+  display: none;
+}
+
+.disabled {
   display: none;
 }
 
@@ -330,6 +342,7 @@ ul {
 }
 
 .imgTrickUser {
+  height: 11rem;
   width: 100%;
 }
 
@@ -382,6 +395,14 @@ ul {
   background-color: rgba(0,0,0,.03);
   border-right: 1px SOLID rgba(0,0,0,.125);
   padding: 0 !important;
+}
+
+.paginationLink {
+  color: #212529;
+}
+
+.paginationLink:hover {
+  color: #EF8923;
 }
 
 .adminNav {

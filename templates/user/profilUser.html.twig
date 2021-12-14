@@ -10,7 +10,7 @@
                     <div class="card-small cardUser">
                         <div class="card-header pt-3 border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ app.user.avatar }}" alt="Avatar" width="110">
+                                <img class="rounded-circle" src="{{ asset(app.user.avatar) }}" alt="Avatar" width="110">
                             </div>
                             <h4 class="mb-0">{{ app.user.username }}</h4>
                             <span class="text-center d-block mb-2">{{ app.user.email }}</span>
@@ -54,23 +54,19 @@
                         </div>
                         <div class="card-body p-0 bg-card">
                             <div class="row containerTricksUser">
-                                {% for trick in app.user.tricks %}
+                                {% for trick in tricks %}
                                     <div class="col-lg-4 col-md-6 col-sm-12 my-4">
                                         <div class="card-small card-post cardUser">
                                             <div class="card-post-image">
-                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser"> 
+                                                <img src="{{ asset(trick.mainImage) }}" alt="snowboarder" class="imgTrickUser"> 
                                             </div>
                                             <div class="card-body profile">
-                                                <h5 class="card-title">
-                                                    Titre trick {# {{ trick.title }} #}
-                                                </h5>
-                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
+                                                <h5 class="card-title">{{ trick.titleTrick }}</h5>
+                                                <span class="text-muted">Ajouté le: {{ trick.dateCreateTrick | date('d-m-Y') }}</span><br />
+                                                <span class="text-muted">Modifié le: {{ trick.dateCreateTrick | date('d-m-Y') }}</span>
                                                 <div class="mt-3">
                                                     <div class="text-center">
-                                                        <button type="button" onclick="window.open('{{ path('trick', {'id': 5}) }}')" target="_blank" class="btnValidate">Consulter</button>
+                                                        <button type="button" onclick="window.open('{{ path('trick', { 'id': trick.id }) }}')" target="_blank" class="btnValidate">Consulter</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,8 +75,7 @@
                                 {% endfor %}
                             </div>
                             <div id="paging-tricks" class="card-footer paging border-top">
-                                {% include('/paging/pagingProfilTricks.html.twig') %}
-                                {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
+                                {% include('/paging/paging.html.twig') %}
                             </div>
                         </div>
                     </div>

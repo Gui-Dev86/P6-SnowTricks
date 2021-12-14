@@ -56,8 +56,6 @@ class Tricks
      */
     private $categories;
 
-    
-
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="tricks", orphanRemoval=true)
      */

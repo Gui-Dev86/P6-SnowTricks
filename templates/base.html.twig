@@ -49,7 +49,7 @@
                                     <a class="nav-link font-weight-bold dropdown-toggle menuLink" href="" role="button" data-toggle="dropdown" id="dropdownMenuLink" aria-expanded="false">{{ app.user.username }}</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <li class="li-item">
-                                            <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('profilUser') }}">Gérer votre compte</a>
+                                            <a class="dropdown-item menuLink font-weight-bold dropdown-nav" href="{{ path('profilUser', {'id': app.user.id}) }}">Gérer votre compte</a>
                                         </li>
                                         {% if app.user.roles.0 == "ROLE_ADMIN" %}
                                             <li class="li-item">
@@ -95,7 +95,7 @@
                                     <a class="nav-link font-weight-bold" href="{{ path('createTrick') }}">Créer une figure</a>
                                 </li>
                                 <li class="nav-item linkBurger">
-                                    <a class="nav-link font-weight-bold" href="{{ path('profilUser') }}">Gérer votre compte</a>
+                                    <a class="nav-link font-weight-bold" href="{{ path('profilUser', {'id': app.user.id}) }}">Gérer votre compte</a>
                                 </li>
                                 {% if app.user.roles.0 == "ROLE_ADMIN" %}
                                     <li class="nav-item linkBurger">

@@ -1,0 +1,26 @@
+
+<div class="container col-12 my-2">
+    <div class="row">   
+        <div class="col-8 offset-2 col-md-4 offset-md-4 text-center">
+            <ul class="pagination">
+                <div class="col-md-3 offset-md-2">  
+                    <li class="page-item {% if page == 1 %} {{ "disabled" }} {% endif %}">
+                        <a class="font-weight-bold paginationLink" href="{{ (page > 1) ? '?page=' ~ (page - 1) : '' }}" class="page-link"><img class="chevronPaging" src="{{ asset('img/chevron.png') }}"></a>
+                    </li>
+                </div>
+                <div class="col-md-2"> 
+                    {% for pageNumber in 1..pagesNumber %}
+                        <li class="page-item {% if page != pageNumber %} {{ "disabled" }} {% endif %}">
+                            <a class="font-weight-bold paginationLink" href="?page={{ pageNumber }}" class="font-weight-bold link-page">{{ page }}</a>
+                        </li>
+                    {% endfor %}
+                </div>
+                <div class="col-md-3"> 
+                    <li class="page-item {% if page == pagesNumber %} {{ "disabled" }} {% endif %}">
+                        <a class="font-weight-bold paginationLink" href="?page={{ page + 1 }}" class="page-link"><img class="chevronPaging chevronRight" src="{{ asset('img/chevron.png') }}"></a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -47,4 +47,34 @@ class TricksRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Returns all Tricks per page
+     * @return void 
+     */
+    public function getPaginateTricks($page, $limit, $id){
+        $query = $this->createQueryBuilder('a')
+            ->where('a.isActiveTrick = 1')
+            ->andWhere('a.user = :id')
+            ->setParameter(':id', $id)
+            ->orderBy('a.dateUpdateTrick', 'DESC')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Returns all Tricks per page
+     * @return void 
+     */
+    public function getTotalTricks($id){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.isActiveTrick = 1')
+            ->andWhere('a.user = :id')
+            ->setParameter(':id', $id)
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }
 }
