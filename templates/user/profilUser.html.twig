@@ -54,7 +54,7 @@
                         </div>
                         <div class="card-body p-0 bg-card">
                             <div class="row containerTricksUser">
-                                {# {% for trick in pagingTrick.data %} #}
+                                {% for trick in app.user.tricks %}
                                     <div class="col-lg-4 col-md-6 col-sm-12 my-4">
                                         <div class="card-small card-post cardUser">
                                             <div class="card-post-image">
@@ -76,54 +76,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                {# {% endfor %} #}
-                                <div class="col-lg-4 col-md-6 col-sm-12 my-4">
-                                        <div class="card-small card-post cardUser">
-                                            <div class="card-post-image">
-                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser">
-                                            </div>
-                                            <div class="card-body profile">
-                                                <h5 class="card-title">
-                                                    Titre trick {# {{ trick.title }} #}
-                                                </h5>
-                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
-                                                <div class="mt-3">
-                                                    <div class="text-center">
-                                                        <button type="button" onclick="window.open('{{ path('trick', {'id': 1}) }}')" target="_blank" class="btnValidate">Consulter</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 my-4">
-                                        <div class="card-small card-post cardUser">
-                                            <div class="card-post-image">
-                                                <img src="/img/upload/snow1.jpg" alt="snowboarder" class="imgTrickUser">
-                                            </div>
-                                            <div class="card-body profile">
-                                                <h5 class="card-title">
-                                                    Titre trick {# {{ trick.title }} #}
-                                                </h5>
-                                                <p class="card-text d-inline-block text-justify mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt semper augue, et tristique urna mattis eu. 
-                                                Quisque nunc odio, mattis eget urna sit amet, rutrum porttitor urna.{# {{ trick.content }} #}</p><br />
-                                                <span class="text-muted">Ajouté le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span><br />
-                                                <span class="text-muted">Modifié le: **/**/**{# {{ trick.dateCreate | date('d-m-Y') }}  #}</span>
-                                                <div class="mt-3">
-                                                    <div class="text-center">
-                                                        <button type="button" onclick="window.open('{{ path('trick', {'id': 2}) }}')" target="_blank" class="btnValidate">Consulter</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
-                        <div id="paging-tricks" class="card-footer paging border-top">
-                            {% include('/paging/pagingProfilTricks.html.twig') %}
-                            {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
+                            <div id="paging-tricks" class="card-footer paging border-top">
+                                {% include('/paging/pagingProfilTricks.html.twig') %}
+                                {# with {'route' : 'profilUser', 'paging' : pagingTrick} #}
+                            </div>
                         </div>
                     </div>
                 </div>
