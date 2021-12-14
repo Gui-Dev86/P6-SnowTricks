@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Form\RegisterFormType;
+use App\Form\ForgotPasswordFormType;
+use App\Form\NewPasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,9 +43,7 @@ class AuthController extends AbstractController
                 ->setTokenPass($confirmationToken);
             $manager->persist($user);
             $manager->flush();
-           
-            
-            
+                  
             //prepare mail to validate the registration
             $message = (new Email())
             ->from('guillaume.vigneres@greta-cfa-aquitaine.academy')
@@ -66,7 +66,7 @@ class AuthController extends AbstractController
 
         return $this->render('auth/register.html.twig', [
             'controller_name' => 'AuthController',
-            'formUser' => $form->createView(),
+            'formRegisterUser' => $form->createView(),
         ]);
     }
    
@@ -126,20 +126,106 @@ class AuthController extends AbstractController
      /**
      * @Route("/forgotPassword", name="forgotPassword")
      */
-    public function forgotPassword(): Response
+    public function forgotPassword(Request $request, UserRepository $userRepository, EntityManagerInterface $manager, MailerInterface $mailer): Response
     {
+        $form = $this->createForm(ForgotPasswordFormType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $user = $userRepository->findOneByUsername($form->getData('username'));
+
+            if ($user !== null)
+            {
+                $dateUpdate = new \DateTime();
+                $confirmationToken = md5(random_bytes(60));
+                $user->setDateUpdate($dateUpdate)
+                    ->setTokenPass($confirmationToken);
+                $manager->persist($user);
+                $manager->flush();
+             
+                //prepare mail to validate the registration
+                $message = (new Email())
+                ->from('guillaume.vigneres@greta-cfa-aquitaine.academy')
+                ->to($user->getEmail())
+                ->subject('Réinitialisation de votre mot de passe')
+                ->html($this->renderView('email/newPass.html.twig', [
+                        'username' => $user->getUsername(),
+                        'id' => $user->getId(),
+                        'token' => $user->getTokenPass(),
+                        'address' => $request->server->get('SERVER_NAME')
+                    ]),
+                );
+                $mailer->send($message);
+
+                $this->addFlash('success', 'Un email de réinitilisation de votre mot de passe a été envoyé sur l\'email affiliée à votre compte.');
+                
+                return $this->redirectToRoute('forgotPassword');
+            }
+            else
+            {
+                $this->addFlash('error', 'Ce nom d\'utilisateur n\'existe pas.');
+                return $this->redirectToRoute('forgotPassword');
+            }
+        }
+
         return $this->render('auth/forgotPassword.html.twig', [
             'controller_name' => 'AuthController',
+            'formPasswordForgot' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/newPassword", name="newPassword")
+     * @Route("/newPassword/{id}/{token}", name="newPassword")
      */
-    public function newPassword(): Response
+    public function newPassword(Request $request, $id, $token, UserRepository $userRepository, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager): Response
     {
+
+        $user = $userRepository->findOneById($id);
+        $usernameUrl = $user->getUsername();
+
+        $form = $this->createForm(NewPasswordFormType::class, $user);
+        $form->handleRequest($request);    
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $formDatas = $form->getData();
+            $usernameForm = $formDatas->getUsername();
+            
+            if ($usernameUrl === $usernameForm)
+            {
+                if($user->getTokenPass() === $token)
+                {
+                    $password = $encoder->encodePassword($user, $user->getPassword());
+                    $user->setPassword($password);
+                    $manager->persist($user);
+                    $manager->flush();
+
+                    $this->addFlash(
+                        'success',
+                        "Votre mot de passe a été modifié avec succès."
+                    );
+                    return $this->redirectToRoute('account_login');
+                }
+                else
+                {
+                    $this->addFlash(
+                        'error',
+                        "La mofification du mot de passe a échoué."
+                    );   
+                }
+            }
+            else
+            {
+                $this->addFlash(
+                    'error',
+                    "Le nom d'utilisateur saisi ne correspond pas à celui associé à votre compte."
+                );  
+            }
+        }
         return $this->render('auth/newPassword.html.twig', [
             'controller_name' => 'AuthController',
+            'formNewPassword' => $form->createView(),
         ]);
     }
 }

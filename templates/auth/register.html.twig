@@ -12,32 +12,32 @@
                         {{ message }}
                     </div>
                 {% endfor %}
-                {{ form_start(formUser) }}   
+                {{ form_start(formRegisterUser) }}
                     <div class="form-group">
                         <label for="registerUsername" class="labelForm" >Nom d'utilisateur</label><br />  
-                        {{ form_widget(formUser.username) }}
-                        {{ form_errors(formUser.username) }}
+                        {{ form_widget(formRegisterUser.username) }}
+                        {{ form_errors(formRegisterUser.username) }}
                     </div>
                     <div class="form-group">
                         <label for="registerEmail" class="labelForm" >Email</label><br />        
-                        {{ form_widget(formUser.email) }}
-                        {{ form_errors(formUser.email) }}
+                        {{ form_widget(formRegisterUser.email) }}
+                        {{ form_errors(formRegisterUser.email) }}
                     </div>     
                     <div class="form-group">
                         <label for="password" class="labelForm">Mot de passe</label><br />  
-                        {{ form_widget(formUser.password) }}
-                        {{ form_errors(formUser.password) }}
+                        {{ form_widget(formRegisterUser.password) }}
+                        {{ form_errors(formRegisterUser.password) }}
                     </div>
                     <div class="form-group">
                         <label for="passwordConfirm" class="labelForm">Confirmer votre mot de passe</label><br />
-                        {{ form_widget(formUser.passwordConfirm) }}
-                        {{ form_errors(formUser.passwordConfirm) }}
+                        {{ form_widget(formRegisterUser.passwordConfirm) }}
+                        {{ form_errors(formRegisterUser.passwordConfirm) }}
                     </div>
                     <div class="form-group my-4 text-center">
                         <button type="submit" class="btnValidate">Inscription</button>
                     </div>
-                    <input type="hidden" id="registerToken" name="register[_token]" value="????????????" />
-                {{ form_end(formUser) }}
+                    <input type="hidden" id="register_form__token" name="register_form[_token]" value="{{ csrf_token('authenticate') }}">
+                {{ form_end(formRegisterUser) }}
             </div>
         </div>
     </main>

@@ -33,7 +33,7 @@
                                     </p>
                                     <div class="flex mb-2">
                                         <a class="font-weight-bold linkFigure" href="{{ path('trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
-                                    {% if trick.id ==  app.user.id or app.user.roles.0 == "ROLE_ADMIN" %}
+                                    {% if (app.user) and ((trick.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
                                         <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
                                         <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
                                     {% endif %}
