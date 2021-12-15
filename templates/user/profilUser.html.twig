@@ -74,9 +74,11 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                            {% if tricks | length > 0 %}
                             <div id="paging-tricks" class="card-footer paging border-top">
                                 {% include('/paging/paging.html.twig') %}
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

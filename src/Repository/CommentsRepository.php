@@ -47,4 +47,34 @@ class CommentsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Returns all Comments per page
+     * @return void 
+     */
+    public function getPaginateComments($page, $limit, $id){
+        $query = $this->createQueryBuilder('a')
+            ->where('a.isActiveCom = 1')
+            ->andWhere('a.user = :id')
+            ->setParameter(':id', $id)
+            ->orderBy('a.dateCreateCom', 'DESC')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Returns all Comments per page
+     * @return void 
+     */
+    public function getTotalComments($id){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.isActiveCom = 1')
+            ->andWhere('a.user = :id')
+            ->setParameter(':id', $id)
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }
 }

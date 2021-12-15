@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Trick;
+use App\Entity\Comments;
+use App\Entity\Tricks;
+use App\Form\CreateCommentFormType;
 use App\Repository\TricksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
 {
@@ -39,12 +43,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/trick/{id}", name="trick")
      */
-    public function trickShow($id, TricksRepository $repositoryTrick): Response
+    public function trickShow($id, Tricks $tricks, Request $request, EntityManagerInterface $manager, TricksRepository $repositoryTrick): Response
     {
+        $comment = new Comments();
+        $form = $this->createForm(CreateCommentFormType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $comment->setDateCreateCom(new \DateTime())
+                ->setIsActiveCom(1)
+                ->setTricks($tricks)
+                ->setUser($this->getUser());
+            $manager->persist($comment);
+            $manager->flush();
+            
+            return $this->redirectToRoute('trick', ['id' => $id]);
+        }
+        
         $trick = $repositoryTrick->findOneById($id);
-       
+
         return $this->render('trick/trick.html.twig', [
             'trick' => $trick,
+            'formCreateComment' => $form->createView(),
         ]);
     }
 

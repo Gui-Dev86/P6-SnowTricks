@@ -363,6 +363,10 @@ ul {
   margin: 5px;
 }
 
+.consultComment {
+  background-color: rgba(0,0,0,.125);
+}
+
 .btnUpload {
   width:7rem;
   position: relative;
