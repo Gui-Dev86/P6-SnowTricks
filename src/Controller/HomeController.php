@@ -6,6 +6,7 @@ use App\Entity\Comments;
 use App\Entity\Tricks;
 use App\Form\CreateCommentFormType;
 use App\Repository\TricksRepository;
+use App\Repository\CommentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,31 +20,16 @@ class HomeController extends AbstractController
      */
     public function index(TricksRepository $repository): Response
     {
-        $tricks = $repository->findBy([], ['dateCreateTrick' => 'DESC'],10, 0);
+        $tricks = $repository->findAll();
         return $this->render('home/index.html.twig', [
             'tricks' => $tricks,
         ]);
     }
 
     /**
-     * Get the 10 next tricks in the database and create a Twig file with them that will be displayed via Javascript
-     * 
-     * @Route("/{first}", name="loadMoreTricks", requirements={"first": "\d+"})
-     */
-    /*public function loadMoreTricks(TricksRepository $repository, $first = 10)
-    {
-        // Get 10 tricks from the first position
-        $tricks = $repository->findBy([], ['dateCreateTrick' => 'DESC'], 10, $first);
-
-        return $this->render('home/loadMoreTricks.html.twig', [
-            'tricks' => $tricks,
-        ]);
-    }*/
-
-    /**
      * @Route("/trick/{id}", name="trick")
      */
-    public function trickShow($id, Tricks $tricks, Request $request, EntityManagerInterface $manager, TricksRepository $repositoryTrick): Response
+    public function trickShow($id, Tricks $tricks, Request $request, EntityManagerInterface $manager, TricksRepository $repositoryTrick, CommentsRepository $repositoryComment): Response
     {
         $comment = new Comments();
         $form = $this->createForm(CreateCommentFormType::class, $comment);
@@ -62,9 +48,11 @@ class HomeController extends AbstractController
         }
         
         $trick = $repositoryTrick->findOneById($id);
-
+        $comments = $repositoryComment->findByTricks($id, ['dateCreateCom' => "DESC"]);
+        
         return $this->render('trick/trick.html.twig', [
             'trick' => $trick,
+            'comments' => $comments,
             'formCreateComment' => $form->createView(),
         ]);
     }

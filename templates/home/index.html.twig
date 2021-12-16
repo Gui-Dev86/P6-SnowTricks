@@ -19,7 +19,7 @@
                 
                 {% for trick in tricks %}
                 
-                    <div class="trickCard mb-3">
+                    <div class="trickCard mb-3 trick">
                         <div class="card-block">
                             <img class="card-img-top rounded-top trickImgHome" src="{{ trick.mainImage }}">
                             <div class="contTrick pt-1 px-2">
@@ -48,7 +48,8 @@
             </div>
             
             <div class="mt-4 text-center">
-                <button id="loadMoreTricks" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger figures suivante</button>
+                <button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger tricks suivant</button>
+                <button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
             </div>
             
         </div>

@@ -111,7 +111,14 @@ ul {
   display: none;
 }
 
-.disabled {
+.disabled,
+div.trick,
+div.comment {
+  display: none;
+}
+
+#loadLessTrick,
+#loadLessComment {
   display: none;
 }
 

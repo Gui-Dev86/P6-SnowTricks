@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UserController extends AbstractController
 {
@@ -45,7 +46,7 @@ class UserController extends AbstractController
      /**
      * @Route("/modifyUser/{id}", name="modifyUser")
      */
-    public function modifyUser(Request $request, EntityManagerInterface $manager): Response
+    public function modifyUser(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
 
         $user = $this->getUser();
@@ -59,7 +60,19 @@ class UserController extends AbstractController
             
             if($newAvatar !== null && $newAvatar !== $precedentAvatar)
             {
-               
+                $originalAvatar = pathinfo($newAvatar->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeAvatar = $slugger->slug($originalAvatar);
+                $avatarFilename = 'img/upload/avatars/'.$safeAvatar.'-'.uniqid().'.'.$newAvatar->guessExtension();
+                try {
+                    $newAvatar->move(
+                        $this->getParameter('avatars_directory'),
+                        $avatarFilename
+                    );
+                } catch (FileException $e) {
+                }
+
+                $user->setAvatar($avatarFilename);
             }
             else
             {
