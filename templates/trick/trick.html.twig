@@ -7,13 +7,15 @@
         <div class="jumbotron jumbotron-fluid homeJumbotron"></div>                
             <div class="col-12 col-md-8 offset-md-2 py-3 mb-3">
                 <div class="card-block position">
-                 {% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %}
-                    <div class="containerModify px-2">
-                        <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="{{ asset('img/crayon.png') }}"></a>
-                        <a class="mb-2 mr-2" href=""><img src="{{ asset('img/poubelle.png') }}"></a>
-                    </div>
+                    {% if app.user %}
+                        {% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %}
+                            <div class="containerModify px-2">
+                                <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="{{ asset('img/crayon.png') }}"></a>
+                                <a class="mb-2 mr-2" href=""><img src="{{ asset('img/poubelle.png') }}"></a>
+                            </div>
+                        {% endif %}
                     {% endif %}
-                    <img class="alignFigure {% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %} {{'alignFigureAdmin'}}{% endif %}" src="{{ asset(trick.mainImage) }}" alt"photo snowboarder">
+                    <img class="alignFigure {% if app.user %}{% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %} {{'alignFigureAdmin'}}{% endif %}{% endif %}" src="{{ asset(trick.mainImage) }}" alt"photo snowboarder">
                     <div class="card-body">
                         <ul class="alignFigure list-inline">
                             <li class="list-inline-item">
@@ -142,32 +144,44 @@
                     </div>
                 </div>
             </div>
-            {{ form_start(formCreateComment) }}
-                <div class="container flexNewComment col-10 col-md-8 my-3">
-                    <div class="col-12 col-md-8 form-group mt-3">
-                        {{ form_widget(formCreateComment.contentCom) }}
-                        {{ form_errors(formCreateComment.contentCom) }}
+            {% if app.user %}
+                {{ form_start(formCreateComment) }}
+                    <div class="container flexNewComment col-10 col-md-8 my-3">
+                        <div class="col-12 col-md-8 form-group mt-3">
+                            {{ form_widget(formCreateComment.contentCom) }}
+                            {{ form_errors(formCreateComment.contentCom) }}
+                        </div>
+                        
+                            <div class="col-12 col-md-4 heightButton">
+                                <button class="btnValidate" type="submit">Laisser un commentaire</button>
+                            </div>
+                    
                     </div>
-                    <div class="col-12 col-md-4 heightButton">
-                        <button class="btnValidate" type="submit">Laisser un commentaire</button>
+                {{ form_end(formCreateComment) }}
+            {% else %}
+                <div class="container commentDisconnect col-10 col-md-8 my-3">
+                    <div class="row">
+                        <div class="col-12 my-4">
+                            <p class="font-weight-bold text-center">Pour laisser un commentaire veuillez vous inscrire ou vous connecter sur le site.</p>
+                        </div>
                     </div>
                 </div>
-            {{ form_end(formCreateComment) }}
+            {% endif %}
             <div class="comments">
                 {% for comment in comments %}
                     <div class="container flex col-12 col-md-8 mb-2 comment">
                         <div class="flex">
                             <div class="col-3 col-md-3">
                                 <a class="mb-2" href=""><img class="avatar" src="{{ asset(comment.user.avatar) }}"></a>
-                                <p>{{ comment.user.username }}</p>
+                                <p class="mobileSizeComment">{{ comment.user.username }}</p>
                             </div>
                             <div class="col-9 col-md-9">
-                                <div class="container contComment ">
+                                <div class="container contComment {% if comment.id == app.request.get("comment") %} consultComment {% endif %}">
                                     <div class="row">
-                                        <p class="py-1 px-1 text-justify">{{ comment.contentCom }}</p>
+                                        <p class="py-1 px-1 text-justify mobileSizeComment">{{ comment.contentCom }}</p>
                                     </div>
                                 </div>
-                                <p class="autorCom">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }}</p>
+                                <p class="autorCom mobileSizeComment">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }}</p>
                             </div>
                         </div>
                     </div>

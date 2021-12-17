@@ -274,6 +274,11 @@ div.comment {
   border: 1px SOLID #212529;
 }
 
+.commentDisconnect {
+  border-top: 1px SOLID #212529;
+  border-bottom: 1px SOLID #212529;
+}
+
 .avatar {
   width: 40%;
 }
@@ -568,4 +573,6 @@ table th.r { text-align: center; }
   .medias { height: 6rem; }
 
   .videosMobile { height: 8rem; }
+
+  .mobileSizeComment { font-size: 10px; }
 }

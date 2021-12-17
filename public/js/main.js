@@ -13,7 +13,6 @@ $(function () {
         $("div.trick").slice(10, $("div.trick").length).hide();
         $("#loadLessTrick").hide("slow");
         $("#loadMoreTrick").show("slow");
-
     });
 });
 
@@ -24,7 +23,6 @@ $(function () {
         $("div.comment:hidden").slice(0, 10).slideDown();
         if ($("div.comment:hidden").length === 0) {
             $("#loadMoreComment").hide("slow");
-            $("#loadLessComment").show("slow");
         }
     });
 });
