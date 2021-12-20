@@ -32,10 +32,10 @@
                                         </small>
                                     </p>
                                     <div class="flex mb-2">
-                                        <a class="font-weight-bold linkFigure" href="{{ path('trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
-                                    {% if (app.user) and ((trick.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
-                                        <a class="iconeHome mb-2 ml-5" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
-                                        <a class="iconeHome mb-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                        <a class="font-weight-bold linkFigure mr-4" href="{{ path('trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
+                                    {% if (app.user) and ((trick.user.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
+                                        <a class="iconeHome mb-2" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2 mr-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
                                     {% endif %}
                                     </div>
                                 </div>

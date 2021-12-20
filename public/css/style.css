@@ -1,6 +1,14 @@
+html {
+  height: 87%;
+}
+
+body {
+  height: 100%;
+}
+
 main {
   margin: 0;
-  min-height: 83vh;
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -222,7 +230,6 @@ div.comment {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .btnValidate:hover {
@@ -407,7 +414,12 @@ div.comment {
   font-family: Shadows Into Light;
 }
 
+.containerAdmin {
+  height: 100%;
+}
+
 .containerMenuAdmin {
+  height: 100%;
   background-color: rgba(0,0,0,.03);
   border-right: 1px SOLID rgba(0,0,0,.125);
   padding: 0 !important;
@@ -436,7 +448,7 @@ div.comment {
 }
 
 .tableAdmin {
-  min-height: 33rem;
+  min-height: 70%;
   border: 1px SOLID rgba(0,0,0,.125);
   padding: 0 !important;
 }

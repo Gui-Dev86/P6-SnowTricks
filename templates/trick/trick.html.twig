@@ -187,13 +187,10 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if comments | length > 10  %}
-               
-                    <div class="my-4 text-center">
-                        <button id="loadMoreComment" type="submit" name="loadNextComment" class="btnValidate btnNewFigure mt-4">Commentaires suivant</button>
-                       
-                    </div>
-                
+            {% if comments | length > 10  %}  
+                <div class="my-4 text-center">
+                    <button id="loadMoreComment" type="submit" name="loadNextComment" class="btnValidate btnNewFigure mt-4">Commentaires suivant</button>
+                </div> 
            {% endif %}
         </div>
     </main>
