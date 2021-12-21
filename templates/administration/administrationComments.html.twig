@@ -15,49 +15,55 @@
                             <thead>
                                 <tr>
                                     <th class="column1 text-center">Figure</th>
-                                    <th class="column2 text-center">Auteur</th>
-                                    <th class="column3 text-center">Création</th>
-                                    <th class="column4 columnEnd text-center">Supprimer</th>
+                                    <th class="column2 text-center">Id</th>
+                                    <th class="column3 text-center">Auteur</th>
+                                    <th class="column4 text-center">Création</th>
+                                    <th class="column5 columnEnd text-center">Supprimer</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            {# {% for user in users %} #}
+                            {# {% for comment in comments %} #}
                                 <tr>
-                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">Test{#{{ user.login_user }} #}</a></td>
-                                    <td class="column2 text-center">Test{#{{ user.email_user }} #}</td>
-                                    <td class="column3 text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    <td class="column4 columnEnd text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #}"><img src="img/poubelle.png"></a></td>                                    
+                                    <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">Test{# {{ comment.tricks.titletrick }} #}</a></td>
+                                    <td class="column2 text-center">id{#{{ comment.id }} #}</td>
+                                    <td class="column3 text-center">Test{#{{ comment.autor }} #}</td>
+                                    <td class="column4 text-center">**/**/**{#{{ comment.dateCreateCom | date('d-m-Y') }} #}</td>
+                                    <td class="column5 columnEnd text-center"><a class="nav-link" href="{{ path('home') }}{#{{ comment.id }} #}"><img src="img/poubelle.png"></a></td>                                    
                                 </tr>
                             {# {% endfor %} #}
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
-                        <div class="row justify-content-center">
-                            <div class="container col-12 col-md-8 offset-md-2">
-                                <table class="panel">
-                                    <tr class="trCompte">
-                                        <td class="text-center">Figure:</td>
-                                        <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ user.login_user }} #}Figure</a></td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Auteur:</td>
-                                        <td class="text-center">Test{#{{ user.email_user }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Création:</td>
-                                        <td class="text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    </tr>                                  
-                                    <tr class="trCompte">
-                                        <td class="text-center">Supprimer:</td>
-                                        <td class="text-center"><a class="nav-link" href="{{ path('home') }}{#{{ user.id_user }} #}"><img src="img/poubelle.png"></a></td>                                    
-                                    </tr>
-                                </table>
+                {# {% for comment in comments %} #}
+                        <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
+                            <div class="row justify-content-center">
+                                <div class="container col-12 col-md-8 offset-md-2">
+                                    <table class="panel">
+                                        <tr class="trCompte">
+                                            <td class="text-center">Figure:</td>
+                                            <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ comment.tricks.titletrick }} #}Figure</a></td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Id:</td>
+                                            <td class="text-center">id{#{{ comment.id }} #}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Auteur:</td>
+                                            <td class="text-center">Test{#{{ comment.autor }} #}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Création:</td>
+                                            <td class="text-center">**/**/**{#{{ comment.dateCreateCom | date('d-m-Y') }} #}</td>
+                                        </tr>                                  
+                                        <tr class="trCompte">
+                                            <td class="text-center">Supprimer:</td>
+                                            <td class="text-center"><a class="nav-link" href="{{ path('home') }}{#{{ comment.id }} #}"><img src="img/poubelle.png"></a></td>                                    
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                {# {% endfor %} #}
                     <div id="pagingAdminUsers" class="paging border-top">
                         {% include('/paging/pagingAdminUsers.html.twig') %}
                         {# with {'route' : 'administration', 'paging' : pagingTrick} #}

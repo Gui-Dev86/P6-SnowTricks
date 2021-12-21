@@ -181,7 +181,7 @@
                                         <p class="py-1 px-1 text-justify mobileSizeComment">{{ comment.contentCom }}</p>
                                     </div>
                                 </div>
-                                <p class="autorCom mobileSizeComment">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }}</p>
+                                <p class="autorCom mobileSizeComment">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }} {% if app.user.roles.0 == "ROLE_ADMIN" %} <span class="text-muted ml-5">Id du commentaire: {{ comment.id }} {% endif %}</span></p>
                             </div>
                         </div>
                     </div>

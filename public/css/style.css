@@ -305,8 +305,7 @@ div.comment {
 
 .tricksAnchor {
   display: block;
-  margin-top: -80px;
-  padding-top: 80px;
+  padding-top: 25px;
   visibility: hidden;
 }
 
@@ -547,8 +546,8 @@ table th.r { text-align: center; }
   }
 
   .tricksAnchor {
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: -50px;
+    padding-top: 70px;
   }
 
   .trickCard {

@@ -23,7 +23,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {# {% for user in users %} #}
+                            {# {% for trick in tricks %} #}
                                 <tr>
                                     <td class="column1 text-center"><a class="nav-link font-weight-bold" href="{{ path('trick', {'id': 1}) }}">Test{#{{ user.login_user }} #}</a></td>
                                     <td class="column2 text-center">Test{#{{ user.email_user }} #}</td>
@@ -36,40 +36,40 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
-                        <div class="row justify-content-center">
-                            <div class="container col-12 col-md-8 offset-md-2">
-                                <table class="panel">
-                                    <tr class="trCompte">
-                                        <td class="text-center">Titre:</td>
-                                        <td class="text-center"><a class="nav-link  font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ user.login_user }} #}Test</a></td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Auteur:</td>
-                                        <td class="text-center">Test{#{{ user.email_user }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Création:</td>
-                                        <td class="text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Mise à jour:</td>
-                                        <td class="text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Modifier:</td>
-                                        <td class="text-center"><a class="nav-link" href="{{ path('modifyTrick') }}" {#{{ user.id_user }} #}><img src="img/crayon.png"></a></td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Supprimer:</td>
-                                        <td class="text-center"><a class="nav-link" href="{{ path('home') }}" {#{{ user.id_user }} #}><img src="img/poubelle.png"></a></td>                                    
-                                    </tr>
-                                </table>
+                    {# {% for trick in tricks %} #}
+                        <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
+                            <div class="row justify-content-center">
+                                <div class="container col-12 col-md-8 offset-md-2">
+                                    <table class="panel">
+                                        <tr class="trCompte">
+                                            <td class="text-center">Titre:</td>
+                                            <td class="text-center"><a class="nav-link  font-weight-bold" href="{{ path('trick', {'id': 1}) }}">{#{{ user.login_user }} #}Test</a></td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Auteur:</td>
+                                            <td class="text-center">Test{#{{ user.email_user }} #}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Création:</td>
+                                            <td class="text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Mise à jour:</td>
+                                            <td class="text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Modifier:</td>
+                                            <td class="text-center"><a class="nav-link" href="{{ path('modifyTrick') }}" {#{{ user.id_user }} #}><img src="img/crayon.png"></a></td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Supprimer:</td>
+                                            <td class="text-center"><a class="nav-link" href="{{ path('home') }}" {#{{ user.id_user }} #}><img src="img/poubelle.png"></a></td>                                    
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                {# {% endfor %} #}
                     <div id="pagingAdminUsers" class="paging border-top">
                         {% include('/paging/pagingAdminUsers.html.twig') %}
                         {# with {'route' : 'administration', 'paging' : pagingTrick} #}
