@@ -198,12 +198,16 @@ div.comment {
   padding-left: 15px;
 }
 
-.nav-link {
-  color: #212529;
-}
+.nav-link,
+.linkDeleteMedias { color: #212529; }
 
 .nav-link:hover,
+.linkDeleteMedias:hover,
 .linkLogin:hover { color: #EF8923; }
+
+.linkDeleteMedias {
+  font-size: 25px;
+}
 
 .linkLogin {
   color: #212529;
@@ -480,6 +484,12 @@ table th.r { text-align: center; }
   font-weight: unset;
 }
 
+.mediasDelete {
+  height: 15rem;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 992px) {
   .trickCard {
     flex: 0 0 50%;
@@ -581,7 +591,8 @@ table th.r { text-align: center; }
     padding-top: 5rem;
   }
 
-  .medias { height: 6rem; }
+  .medias,
+  .mediasDelete { height: 6rem; }
 
   .videosMobile { height: 8rem; }
 

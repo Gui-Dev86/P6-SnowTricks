@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,13 +27,15 @@ class CreateTricksFormType extends AbstractType
                 'class' => 'form-control',
                 'placeholder' => 'Entrer le nom du trick'
             )))
-            ->add('contentTrick', TextType::class, array(
+            ->add('contentTrick', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'placeholder' => 'Entrer la description'
+                    'placeholder' => 'Entrer la description',
+                    'rows' => 5,
                 )))
             ->add('mainImage', FileType::class, array(
                 'required' => false,
+                'data_class' => null,
                 'attr' => array(
                     'class' => 'hideUpload',
                     'placeholder' => 'Upload'
@@ -41,6 +44,7 @@ class CreateTricksFormType extends AbstractType
                 'label' => false,
                 'multiple' => true,
                 'mapped' => false,
+                'data_class' => null,
                 'required' => false,
                 'attr' => array(
                     'class' => 'hideUpload',
@@ -48,6 +52,7 @@ class CreateTricksFormType extends AbstractType
                 )))
             ->add('videos', UrlType::class, array(
                 'label' => false,
+                'data_class' => null,
                 'mapped' => false,
                 'required' => false,
                 'attr' => array(

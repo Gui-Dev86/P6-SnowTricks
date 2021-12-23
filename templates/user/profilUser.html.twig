@@ -54,6 +54,13 @@
                         </div>
                         <div class="card-body p-0 bg-card">
                             <div class="row containerTricksUser">
+                                {% for message in app.flashes('success') %}
+                                    <div class="container text-center col-12">
+                                        <div class="alert alert-success">
+                                            {{ message }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
                                 {% for trick in tricks %}
                                     <div class="col-lg-4 col-md-6 col-sm-12 my-4">
                                         <div class="card-small card-post cardUser">

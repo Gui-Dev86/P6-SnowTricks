@@ -10,8 +10,8 @@
                     {% if app.user %}
                         {% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %}
                             <div class="containerModify px-2">
-                                <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick') }}"><img src="{{ asset('img/crayon.png') }}"></a>
-                                <a class="mb-2 mr-2" href=""><img src="{{ asset('img/poubelle.png') }}"></a>
+                                <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick', {'id': trick.id}) }}"><img src="{{ asset('img/crayon.png') }}"></a>
+                                <a class="mb-2 mr-2" href="{{ path('deleteTrick', {'id': trick.id}) }}"><img src="{{ asset('img/poubelle.png') }}"></a>
                             </div>
                         {% endif %}
                     {% endif %}
@@ -62,21 +62,23 @@
                                                     <div class="carousel-item {% if loop.index0 == 0 %} active {% endif %}" > 
                                                         <a class="mb-2" href="{{ asset(image.pathImage) }}"><img class="medias" src="{{ asset(image.pathImage) }}" alt="photo snowboarder"></a> 
                                                     </div>                                               
-                                                {% endfor %}                                       
-                                                <a class="carousel-control-prev" href="#carouselImages" role="button" data-slide="prev">                                               
-                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                        width="50" height="50"
-                                                        viewBox="0 0 172 172"
-                                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
-                                                    </svg>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselImages" role="button" data-slide="next">                                              
-                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                        width="50" height="50"
-                                                        viewBox="0 0 172 172"
-                                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
-                                                    </svg>                                    
-                                                </a>                                          
+                                                {% endfor %}
+                                                {% if trick.images | length > 1  %}
+                                                    <a class="carousel-control-prev" href="#carouselImages" role="button" data-slide="prev">                                               
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                            width="50" height="50"
+                                                            viewBox="0 0 172 172"
+                                                            style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                        </svg>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselImages" role="button" data-slide="next">                                              
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                            width="50" height="50"
+                                                            viewBox="0 0 172 172"
+                                                            style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                        </svg>                                    
+                                                    </a>
+                                                {% endif %}                                          
                                             </div>
                                         </div>
                                     </div>
@@ -101,20 +103,22 @@
                                                         <iframe class="medias" src="{{ video.linkVideo }}" allowfullscreen></iframe>
                                                     </div>
                                                 {% endfor %}
-                                                <a class="carousel-control-prev" href="#carouselVideos" role="button" data-slide="prev">                                               
-                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                        width="50" height="50"
-                                                        viewBox="0 0 172 172"
-                                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
-                                                    </svg>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselVideos" role="button" data-slide="next">                                              
-                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                        width="50" height="50"
-                                                        viewBox="0 0 172 172"
-                                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
-                                                    </svg>                                    
-                                                </a>                                          
+                                                {% if trick.videos | length > 1  %}
+                                                    <a class="carousel-control-prev" href="#carouselVideos" role="button" data-slide="prev">                                               
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                            width="50" height="50"
+                                                            viewBox="0 0 172 172"
+                                                            style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M110.55031,10.535c-0.90031,0 -1.74688,0.36281 -2.39188,0.99438l-72.52219,71.94437c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l71.94437,72.53562c1.34375,1.34375 3.52063,1.35719 4.86438,0.01344l20.72062,-20.54594c1.35719,-1.34375 1.37063,-3.52062 0.02688,-4.87781l-48.96625,-49.35594l49.36937,-48.96625c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.86437l-20.54594,-20.72063c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                        </svg>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselVideos" role="button" data-slide="next">                                              
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                            width="50" height="50"
+                                                            viewBox="0 0 172 172"
+                                                            style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ef8923"><path d="M62.39031,10.32c-0.90031,0.01344 -1.74688,0.36281 -2.39188,0.99438l-20.72062,20.55937c-1.34375,1.34375 -1.35719,3.52063 -0.02688,4.86438l48.96625,49.36937l-49.35594,48.96625c-1.35719,1.34375 -1.37062,3.52063 -0.02687,4.86438l20.55937,20.72062c1.34375,1.35719 3.52063,1.37063 4.86438,0.02688l72.53562,-71.94438c1.34375,-1.34375 1.35719,-3.52062 0.01344,-4.87781l-71.93094,-72.52219c-0.65844,-0.67187 -1.55875,-1.03469 -2.48594,-1.02125z"></path></g></g>
+                                                        </svg>                                    
+                                                    </a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div><hr>
@@ -181,7 +185,7 @@
                                         <p class="py-1 px-1 text-justify mobileSizeComment">{{ comment.contentCom }}</p>
                                     </div>
                                 </div>
-                                <p class="autorCom mobileSizeComment">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }} {% if app.user.roles.0 == "ROLE_ADMIN" %} <span class="text-muted ml-5">Id du commentaire: {{ comment.id }} {% endif %}</span></p>
+                                <p class="autorCom mobileSizeComment">Posté le : {{ comment.dateCreateCom  | date('d-m-Y') }} {% if app.user %}{% if app.user.roles.0 == "ROLE_ADMIN" %} <span class="text-muted ml-5">Id du commentaire: {{ comment.id }} {% endif %}{% endif %}</span></p>
                             </div>
                         </div>
                     </div>

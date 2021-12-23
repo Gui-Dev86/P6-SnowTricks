@@ -14,12 +14,12 @@
                 {% endfor %}
                 {{ form_start(formCreateTrick) }}
                     <div class="form-group">
-                        <label for="title" class="labelForm">Titre</label>
+                        <label for="title" class="labelForm">Nom</label>
                         {{ form_widget(formCreateTrick.titleTrick) }}
                         {{ form_errors(formCreateTrick.titleTrick) }}
                     </div>
                     <div class="form-group">
-                        <label for="content" class="labelForm">Contenu</label>
+                        <label for="content" class="labelForm">Description</label>
                         {{ form_widget(formCreateTrick.contentTrick) }}
                         {{ form_errors(formCreateTrick.contentTrick) }}
                     </div>

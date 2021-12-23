@@ -77,10 +77,13 @@ class TricksController extends AbstractController
                 $trick->addImage($img);
             }
             $linkVideo = $form->get('videos')->getData();
-
-            $video = new Video();
-            $video->setLinkVideo($linkVideo);
-            $trick->addVideo($video);
+            
+            if($linkVideo !== null)
+            {
+                $video = new Video();
+                $video->setLinkVideo($linkVideo);
+                $trick->addVideo($video);
+            }
 
             $manager->persist($trick);
             $manager->flush();
@@ -94,13 +97,151 @@ class TricksController extends AbstractController
     }
 
      /**
-     * @Route("/modifyTrick", name="modifyTrick")
+     * @Route("/modifyTrick/{id}", name="modifyTrick")
      */
-    public function modifyTrick(): Response
+    public function modifyTrick($id, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, Tricks $trick, TricksRepository $repositoryTrick): Response
     {
+        //recover the actual main Image
+        $precedentMainImg = $trick->getMainImage();
+        $form = $this->createForm(CreateTricksFormType::class, $trick);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $newMainImg = $form->get('mainImage')->getData();
+            $dateUpdateTrick = new \DateTime();
+            $trick->setDateUpdateTrick($dateUpdateTrick);
+
+            if($newMainImg !== null && $newMainImg !== $precedentMainImg)
+            {
+                $originalMainImage = pathinfo($newMainImg->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeMainImage = $slugger->slug($originalMainImage);
+                $mainImageFilename = 'img/upload/'.$safeMainImage.'-'.uniqid().'.'.$newMainImg->guessExtension();
+                try {
+                    $newMainImg->move(
+                        $this->getParameter('images_directory'),
+                        $mainImageFilename
+                    );
+                } catch (FileException $e) {
+                }
+
+                $trick->setMainImage($mainImageFilename);
+            }
+            else
+            {
+                $trick->setMainImage($precedentMainImg);
+            }
+            //add new images
+            $imagesGallery = $form->get('images')->getData();
+
+            foreach($imagesGallery as $image){
+                //generate a new file name
+                $fichier = 'img/upload/'.md5(uniqid()) . '.' . $image->guessExtension();
+                //copy the file in the file upload
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+                //store the images in the database
+                $img = new Image();
+                $img->setPathImage($fichier);
+                $trick->addImage($img);
+            }
+
+            $linkVideo = $form->get('videos')->getData();
+            //add new video
+            if($linkVideo !== null)
+            {
+                $video = new Video();
+                $video->setLinkVideo($linkVideo);
+                $trick->addVideo($video);
+            }
+            $manager->persist($trick);
+            $manager->flush();
+            $this->addFlash('success', 'Votre trick a été modifié avec succés');
+            return $this->redirectToRoute('modifyTrick', ['id' => $id]);
+
+        }
+
         return $this->render('trick/modifyTrick.html.twig', [
             'controller_name' => 'TricksController',
+            'formModifyTrick' => $form->createView(),
+            'trickId' => $id,
         ]);
+    }
+
+    /**
+     * @Route("/listDeleteImages/{id}", name="listDeleteImages")
+     */
+    public function listDeleteImages(Tricks $trick): Response
+    {      
+        return $this->render('trick/listDeleteImages.html.twig', [
+            'trick' => $trick,
+        ]);
+    }
+
+    /**
+     * @Route("/listDeleteVideos/{id}", name="listDeleteVideos")
+     */
+    public function listDeleteVideos(Tricks $trick): Response
+    {      
+        return $this->render('trick/listDeleteVideos.html.twig', [
+            'trick' => $trick,
+        ]);
+    }
+
+    /**
+     * @Route("/deleteImage/{id}", name="deleteImage")
+     */
+    public function deleteImage($id, ImageRepository $repositoryImage, Request $request): Response
+    {
+        $imageDel = (int)$request->query->get("image");
+        $datasImage = $repositoryImage->findOneById($imageDel);
+        $pathImage=$datasImage->getPathImage();
+        
+        unlink($this->getParameter('delImages_directory').'/'.$pathImage);
+        
+        $manager = $this->getDoctrine()->getManager();
+            $manager->remove($datasImage);
+            $manager->flush();
+
+        $this->addFlash('success', 'L\'image a été supprimé avec succés');
+
+        return $this->redirectToRoute('listDeleteImages', ['id' => $id]);
+    }
+
+    /**
+     * @Route("/deleteVideo/{id}", name="deleteVideo")
+     */
+    public function deleteVideo($id, VideoRepository $repositoryVideo, Request $request): Response
+    {
+
+        $videoDel = (int)$request->query->get("video");
+        $datasVideo = $repositoryVideo->findOneById($videoDel);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($datasVideo);
+        $manager->flush();
+        
+        $this->addFlash('success', 'La vidéo a été supprimé avec succés');
+        
+        return $this->redirectToRoute('listDeleteVideos', ['id' => $id]);
+    }
+
+    /**
+     * @Route("/deleteTrick/{id}", name="deleteTrick")
+     */
+    public function deleteTrick($id, Tricks $trick, Request $request): Response
+    {
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($trick);
+        $manager->flush();
+        
+        $this->addFlash('success', 'Le trick a été supprimé avec succés');
+        
+        return $this->redirectToRoute('profilUser', ['id' => $idUser]);
     }
 
 
