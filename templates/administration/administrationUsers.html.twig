@@ -4,7 +4,7 @@
 
 {% block body %}
     <main>
-        <div class="container col-10 containerAdmin">
+        <div class="container col-12 col-md-10 containerAdmin">
             <div class="row containerAdmin">
                 {% include('/administration/navAdministration.html.twig') %}
                 <div class="col-md-9">
@@ -23,64 +23,71 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {# {% for user in users %} #}
-                                <tr>
-                                    <td class="column1 text-center">Test{#{{ user.login_user }} #}</td>
-                                    <td class="column2 text-center">test@test.fr{#{{ user.email_user }} #}</td>
-                                    <td class="column3 text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    <td class="column4 text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
-                                    <td class="column5 text-center">Inactif{#{% if user.isActiveUser_user == 1 and user.isActiveAdmin_user == 1 %} {{ "Actif" }} {% else %} {{ "Inactif" }} {% endif %} #}</td>
-                                    {# {% if user.statut != 1 %} #}
-                                        <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
-                                    {# {% else %} #}
-                                        <!-- <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td> -->
-                                    {# {% endif %} #}
-                                </tr>
-                            {# {% endfor %} #}
+                                {% for user in users %}
+                                    <tr>
+                                        <td class="column1 text-center">{{ user.username }}</td>
+                                        <td class="column2 text-center">{{ user.email }}</td>
+                                        <td class="column3 text-center">{{ user.dateCreate | date('d-m-Y') }}</td>
+                                        <td class="column4 text-center">{% if user.dateCreate != user.dateUpdate %} {{ user.dateUpdate | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}</td>
+                                        <td class="column5 text-center">{% if user.isActive == 1  %} {{ "Actif" }} {% else %} {{ "Inactif" }} {% endif %}</td>
+                                            {% if user.id == 1 %}
+                                                <td class="column6 columnEnd font-weight-bold text-center">Administrateur</td>
+                                            {% else %}
+                                                {% if user.isActive != 1 %}
+                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
+                                                {% else %}
+                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td>
+                                                {% endif %}
+                                            {% endif %}
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                    {# {% for user in users %} #}
-                    <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
-                        <div class="row justify-content-center">
-                            <div class="container col-12 col-md-8 offset-md-2">
-                                <table class="panel">
-                                    <tr class="trCompte">
-                                        <td class="text-center">Login:</td>
-                                        <td class="text-center">{#{{ user.login_user }} #}Test</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Email:</td>
-                                        <td class="text-center">test@test.fr{#{{ user.email_user }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Inscription:</td>
-                                        <td class="text-center">**/**/**{#{{ user.dateCreate_user | date('d-m-Y') }} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Mise à jour:</td>
-                                        <td class="text-center">---{#{% if user.dateCreate_user != user.dateUpdate_user %} {{ user.dateUpdate_user | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Statut:</td>
-                                        <td class="text-center">Inactif{#{% if user.isActiveUser_user == 1 and user.isActiveAdmin_user == 1 %} {{ "Actif" }} {% else %} {{ "Inactif" }} {% endif %} #}</td>
-                                    </tr>
-                                    <tr class="trCompte">
-                                        <td class="text-center">Activer/Désactiver:</td>
-                                        {# {% if user.statut != 1 %} #}
-                                            <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
-                                        {# {% else %} #}
-                                            <!-- <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td> -->
-                                        {# {% endif %} #}
-                                    </tr>
-                                </table>
+                    {% for user in users %}
+                        <div class="container col-12 col-md-10 mb-3 displayNone containerAdminMobile">
+                            <div class="row justify-content-center">
+                                <div class="container col-12 col-md-8 offset-md-2">
+                                    <table class="panel">
+                                        <tr class="trCompte">
+                                            <td class="text-center">Login:</td>
+                                            <td class="text-center">{{ user.username }}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Email:</td>
+                                            <td class="text-center">{{ user.email }}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Inscription:</td>
+                                            <td class="text-center">{{ user.dateCreate | date('d-m-Y') }}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Mise à jour:</td>
+                                            <td class="text-center">{% if user.dateCreate != user.dateUpdate %} {{ user.dateUpdate | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Statut:</td>
+                                            <td class="text-center">{% if user.isActive == 1  %} {{ "Actif" }} {% else %} {{ "Inactif" }} {% endif %}</td>
+                                        </tr>
+                                        <tr class="trCompte">
+                                            <td class="text-center">Activer/Désactiver:</td>
+                                            {% if user.id == 1 %}
+                                                <td class="column6 font-weight-bold text-center">Administrateur</td>
+                                            {% else %}
+                                                {% if user.isActive != 1 %}
+                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
+                                                {% else %}
+                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td>
+                                                {% endif %}
+                                            {% endif %}
+                                            </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {# {% endfor %} #}
+                    {% endfor %}
                     <div id="pagingAdminUsers" class="paging border-top">
-                        {% include('/paging/pagingAdminUsers.html.twig') %}
-                        {# with {'route' : 'administration', 'paging' : pagingTrick} #}
+                        {% include('/paging/paging.html.twig') %}
                     </div>  
                 </div>
             </div>

@@ -7,7 +7,7 @@
         <div class="jumbotron jumbotron-fluid homeJumbotron"></div>                
             <div class="col-12 col-md-8 offset-md-2 py-3 mb-3">
                 <div class="card-block position">
-                    {% if app.user %}
+                    {% if app.user and app.user.isActive == 1 %}
                         {% if trick.user.id == app.user.id or app.user.roles.0 == "ROLE_ADMIN" %}
                             <div class="containerModify px-2">
                                 <a class="mb-2 ml-2 mr-4" href="{{ path('modifyTrick', {'id': trick.id}) }}"><img src="{{ asset('img/crayon.png') }}"></a>
@@ -148,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            {% if app.user %}
+            {% if app.user and app.user.isActive == 1 %}
                 {{ form_start(formCreateComment) }}
                     <div class="container flexNewComment col-10 col-md-8 my-3">
                         <div class="col-12 col-md-8 form-group mt-3">
@@ -162,6 +162,14 @@
                     
                     </div>
                 {{ form_end(formCreateComment) }}
+            {% elseif app.user and app.user.isActive == 0 %}
+                <div class="container commentDisconnect col-10 col-md-8 my-3">
+                    <div class="row">
+                        <div class="col-12 my-4">
+                            <p class="font-weight-bold text-center">Votre compte a été désactivé par un administrateur, veuillez nous contacter.</p>
+                        </div>
+                    </div>
+                </div>
             {% else %}
                 <div class="container commentDisconnect col-10 col-md-8 my-3">
                     <div class="row">

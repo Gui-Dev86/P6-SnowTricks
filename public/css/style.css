@@ -597,4 +597,6 @@ table th.r { text-align: center; }
   .videosMobile { height: 8rem; }
 
   .mobileSizeComment { font-size: 10px; }
+
+  .menuMobileAdmin { padding: 0 20px; }
 }

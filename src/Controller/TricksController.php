@@ -231,7 +231,7 @@ class TricksController extends AbstractController
     /**
      * @Route("/deleteTrick/{id}", name="deleteTrick")
      */
-    public function deleteTrick($id, Tricks $trick, Request $request): Response
+    public function deleteTrick($id, Tricks $trick, Request $request, TricksRepository $tricksRepository): Response
     {
         $user = $this->getUser();
         $idUser = $user->getId();
@@ -239,9 +239,31 @@ class TricksController extends AbstractController
         $manager->remove($trick);
         $manager->flush();
         
-        $this->addFlash('success', 'Le trick a été supprimé avec succés');
+        $admin = (int)$request->query->get("admin");
         
-        return $this->redirectToRoute('profilUser', ['id' => $idUser]);
+        if( $admin == 1) {
+            //tricks per page
+            $limit = 5;
+            //recover page
+            $page = (int)$request->query->get("page", 1);
+            //number total of tricks by autor
+            $total = $tricksRepository->getTotalTricksAdmin();
+            //recover tricks per page and autor
+            $tricks = $tricksRepository->getPaginateTricksAdmin($page, $limit);
+            
+            //calculate the pages number
+            $pagesNumber = ceil($total / $limit);
+            return $this->redirectToRoute('pageAdminTricks', [
+                'tricks' => $tricks,
+                'page' => $page,
+                'pagesNumber' => $pagesNumber,
+            ]);
+        }
+        else
+        {
+            $this->addFlash('success', 'Le trick a été supprimé avec succés');
+            return $this->redirectToRoute('profilUser', ['id' => $idUser]);
+        }
     }
 
 

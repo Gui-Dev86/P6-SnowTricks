@@ -64,4 +64,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+     /**
+     * Returns all Users per page and user
+     * @return void 
+     */
+    public function getPaginateUsersAdmin($page, $limit){
+        $query = $this->createQueryBuilder('a')
+            ->orderBy('a.dateUpdate', 'DESC')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Count all Users per page and user
+     * @return void 
+     */
+    public function getTotalUsersAdmin(){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }
 }
