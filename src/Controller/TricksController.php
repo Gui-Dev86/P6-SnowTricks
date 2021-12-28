@@ -101,74 +101,88 @@ class TricksController extends AbstractController
      */
     public function modifyTrick($id, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, Tricks $trick, TricksRepository $repositoryTrick): Response
     {
-        //recover the actual main Image
-        $precedentMainImg = $trick->getMainImage();
-        $form = $this->createForm(CreateTricksFormType::class, $trick);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
+        //revover the id autor trick
+        $trickAutor = $trick->getUser();
+        $trickAutorId = $trickAutor->getId();
+        //revover the id member connected
+        $user = $this->getUser();
+        $userId = $user->getId();
+        //verify if the user connected is the tricks autor or the admin
+        if($userId == $trickAutorId || $userId == 1)
         {
-            $newMainImg = $form->get('mainImage')->getData();
-            $dateUpdateTrick = new \DateTime();
-            $trick->setDateUpdateTrick($dateUpdateTrick);
+            //recover the actual main Image
+            $precedentMainImg = $trick->getMainImage();
+            $form = $this->createForm(CreateTricksFormType::class, $trick);
+            $form->handleRequest($request);
 
-            if($newMainImg !== null && $newMainImg !== $precedentMainImg)
+            if($form->isSubmitted() && $form->isValid())
             {
-                $originalMainImage = pathinfo($newMainImg->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeMainImage = $slugger->slug($originalMainImage);
-                $mainImageFilename = 'img/upload/'.$safeMainImage.'-'.uniqid().'.'.$newMainImg->guessExtension();
-                try {
-                    $newMainImg->move(
+                $newMainImg = $form->get('mainImage')->getData();
+                $dateUpdateTrick = new \DateTime();
+                $trick->setDateUpdateTrick($dateUpdateTrick);
+
+                if($newMainImg !== null && $newMainImg !== $precedentMainImg)
+                {
+                    $originalMainImage = pathinfo($newMainImg->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeMainImage = $slugger->slug($originalMainImage);
+                    $mainImageFilename = 'img/upload/'.$safeMainImage.'-'.uniqid().'.'.$newMainImg->guessExtension();
+                    try {
+                        $newMainImg->move(
+                            $this->getParameter('images_directory'),
+                            $mainImageFilename
+                        );
+                    } catch (FileException $e) {
+                    }
+
+                    $trick->setMainImage($mainImageFilename);
+                }
+                else
+                {
+                    $trick->setMainImage($precedentMainImg);
+                }
+                //add new images
+                $imagesGallery = $form->get('images')->getData();
+
+                foreach($imagesGallery as $image){
+                    //generate a new file name
+                    $fichier = 'img/upload/'.md5(uniqid()) . '.' . $image->guessExtension();
+                    //copy the file in the file upload
+                    $image->move(
                         $this->getParameter('images_directory'),
-                        $mainImageFilename
+                        $fichier
                     );
-                } catch (FileException $e) {
+                    //store the images in the database
+                    $img = new Image();
+                    $img->setPathImage($fichier);
+                    $trick->addImage($img);
                 }
 
-                $trick->setMainImage($mainImageFilename);
-            }
-            else
-            {
-                $trick->setMainImage($precedentMainImg);
-            }
-            //add new images
-            $imagesGallery = $form->get('images')->getData();
+                $linkVideo = $form->get('videos')->getData();
+                //add new video
+                if($linkVideo !== null)
+                {
+                    $video = new Video();
+                    $video->setLinkVideo($linkVideo);
+                    $trick->addVideo($video);
+                }
+                $manager->persist($trick);
+                $manager->flush();
+                $this->addFlash('success', 'Votre trick a été modifié avec succés');
+                return $this->redirectToRoute('modifyTrick', ['id' => $id]);
 
-            foreach($imagesGallery as $image){
-                //generate a new file name
-                $fichier = 'img/upload/'.md5(uniqid()) . '.' . $image->guessExtension();
-                //copy the file in the file upload
-                $image->move(
-                    $this->getParameter('images_directory'),
-                    $fichier
-                );
-                //store the images in the database
-                $img = new Image();
-                $img->setPathImage($fichier);
-                $trick->addImage($img);
             }
 
-            $linkVideo = $form->get('videos')->getData();
-            //add new video
-            if($linkVideo !== null)
-            {
-                $video = new Video();
-                $video->setLinkVideo($linkVideo);
-                $trick->addVideo($video);
-            }
-            $manager->persist($trick);
-            $manager->flush();
-            $this->addFlash('success', 'Votre trick a été modifié avec succés');
-            return $this->redirectToRoute('modifyTrick', ['id' => $id]);
-
+            return $this->render('trick/modifyTrick.html.twig', [
+                'controller_name' => 'TricksController',
+                'formModifyTrick' => $form->createView(),
+                'trickId' => $id,
+            ]);
         }
-
-        return $this->render('trick/modifyTrick.html.twig', [
-            'controller_name' => 'TricksController',
-            'formModifyTrick' => $form->createView(),
-            'trickId' => $id,
-        ]);
+        else
+        {
+            return $this->render('bundles/TwigBundle/Exception/error403.html.twig');
+        }
     }
 
     /**
