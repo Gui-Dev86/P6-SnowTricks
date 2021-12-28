@@ -250,9 +250,9 @@ class TricksController extends AbstractController
             $total = $tricksRepository->getTotalTricksAdmin();
             //recover tricks per page and autor
             $tricks = $tricksRepository->getPaginateTricksAdmin($page, $limit);
-            
             //calculate the pages number
             $pagesNumber = ceil($total / $limit);
+            
             return $this->redirectToRoute('pageAdminTricks', [
                 'tricks' => $tricks,
                 'page' => $page,

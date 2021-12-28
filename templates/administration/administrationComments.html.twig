@@ -28,7 +28,7 @@
                                         <td class="column2 text-center">{{ comment.id }}</td>
                                         <td class="column3 text-center">{{ comment.user.username }}</td>
                                         <td class="column4 text-center">{{ comment.dateCreateCom | date('d-m-Y') }}</td>
-                                        <td class="column5 columnEnd text-center"><a class="nav-link" href="{{ path('home') }}{#{{ comment.id }} #}"><img src="img/poubelle.png"></a></td>                                    
+                                        <td class="column5 columnEnd text-center"><a class="nav-link" href="{{ path('deleteComment', {'id': comment.id }) }}"><img src="img/poubelle.png"></a></td>                                    
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -57,7 +57,7 @@
                                         </tr>                                  
                                         <tr class="trCompte">
                                             <td class="text-center">Supprimer:</td>
-                                            <td class="text-center"><a class="nav-link" href="{{ path('home') }}{#{{ comment.id }} #}"><img src="img/poubelle.png"></a></td>                                    
+                                            <td class="text-center"><a class="nav-link" href="{{ path('deleteComment', {'id': comment.id }) }}"><img src="img/poubelle.png"></a></td>                                    
                                         </tr>
                                     </table>
                                 </div>

@@ -34,9 +34,9 @@
                                                 <td class="column6 columnEnd font-weight-bold text-center">Administrateur</td>
                                             {% else %}
                                                 {% if user.isActive != 1 %}
-                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
+                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('activeUser', {'id': user.id }) }}">Activer</a></td>
                                                 {% else %}
-                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td>
+                                                    <td class="column6 columnEnd text-center"><a class="nav-link font-weight-bold" href="{{ path('desactiveUser', {'id': user.id }) }}">Désactiver</a></td>
                                                 {% endif %}
                                             {% endif %}
                                     </tr>
@@ -75,9 +75,9 @@
                                                 <td class="column6 font-weight-bold text-center">Administrateur</td>
                                             {% else %}
                                                 {% if user.isActive != 1 %}
-                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Activer</a></td>
+                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('activeUser', {'id': user.id }) }}">Activer</a></td>
                                                 {% else %}
-                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('home') }}{#{{ user.id_user }} #} #}">Désactiver</a></td>
+                                                    <td class="text-center"><a class="nav-link font-weight-bold" href="{{ path('desactiveUser', {'id': user.id }) }}">Désactiver</a></td>
                                                 {% endif %}
                                             {% endif %}
                                             </tr>

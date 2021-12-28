@@ -1,5 +1,5 @@
 html {
-  height: 87%;
+  height: 82%;
 }
 
 body {
@@ -86,7 +86,6 @@ ul {
 
 .alignFigure {
   width: 100%;
-  margin-bottom: 40px;
 }
 
 .alignFigureAdmin {
@@ -316,7 +315,7 @@ div.comment {
 .topChevron {
   float: right;
   margin-right: 35px;
-  margin-top: 17rem;
+  margin-top: 14rem;
 }
 
 .downChevron {

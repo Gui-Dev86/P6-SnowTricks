@@ -46,11 +46,12 @@
                 {% endfor %}
                 
             </div>
-            
-            <div class="mt-4 text-center">
-                <button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger tricks suivant</button>
-                <button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
-            </div>
+            {% if tricks | length > 10 %}
+                <div class="mt-4 text-center">
+                    <button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger tricks suivant</button>
+                    <button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
+                </div>
+            {% endif %}
             
         </div>
         <div class="row">
