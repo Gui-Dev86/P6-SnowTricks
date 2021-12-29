@@ -500,7 +500,7 @@ table th.r { text-align: center; }
   .displayBlock { display: none; }
 
   .displayNone { display: block; }
-  
+
   .mediasMobile { display: none; }
 
   .navbarMenu {
@@ -534,7 +534,7 @@ table th.r { text-align: center; }
   .flexNewComment { display: block; }
 
   .heightButton {
-    padding-top: 0px;
+    padding-top: 0;
     margin-bottom: 1rem;
     text-align: center;
   }
