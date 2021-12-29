@@ -142,28 +142,28 @@ class TricksController extends AbstractController
                     $trick->setMainImage($precedentMainImg);
                 }
                 //add new images
-                $imagesGallery = $form->get('images')->getData();
+                $newImages = $form->get('images')->getData();
 
-                foreach($imagesGallery as $image){
+                foreach($newImages as $newImage){
                     //generate a new file name
-                    $fichier = 'img/upload/'.md5(uniqid()) . '.' . $image->guessExtension();
+                    $newFichier = 'img/upload/'.md5(uniqid()) . '.' . $newImage->guessExtension();
                     //copy the file in the file upload
-                    $image->move(
+                    $newImage->move(
                         $this->getParameter('images_directory'),
-                        $fichier
+                        $newFichier
                     );
                     //store the images in the database
-                    $img = new Image();
-                    $img->setPathImage($fichier);
-                    $trick->addImage($img);
+                    $image = new Image();
+                    $image->setPathImage($newFichier);
+                    $trick->addImage($image);
                 }
 
-                $linkVideo = $form->get('videos')->getData();
+                $newLinkVideo = $form->get('videos')->getData();
                 //add new video
-                if($linkVideo !== null)
+                if($newLinkVideo !== null)
                 {
                     $video = new Video();
-                    $video->setLinkVideo($linkVideo);
+                    $video->setLinkVideo($newLinkVideo);
                     $trick->addVideo($video);
                 }
                 $manager->persist($trick);
@@ -212,13 +212,13 @@ class TricksController extends AbstractController
     {
         $imageDel = (int)$request->query->get("image");
         $datasImage = $repositoryImage->findOneById($imageDel);
-        $pathImage=$datasImage->getPathImage();
+        $pathImage = $datasImage->getPathImage();
         
         unlink($this->getParameter('delImages_directory').'/'.$pathImage);
         
         $manager = $this->getDoctrine()->getManager();
-            $manager->remove($datasImage);
-            $manager->flush();
+        $manager->remove($datasImage);
+        $manager->flush();
 
         $this->addFlash('success', 'L\'image a été supprimé avec succés');
 
