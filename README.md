@@ -31,13 +31,13 @@ npm install
 
 Pour paramétrer votre base de données, modifiez cette ligne avec le nom d'utilisateur, mot de passe et nom de la base de données correespondant (ne pas oublier de retirer le # devant la ligne afin qu'elle soit prise en compte).
 
-    ## DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
+    # DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
 
 exemple : DATABASE_URL="mysql://utilisateur(root de base):mot de passe(vide de base)@127.0.0.1:3306/(nom de la base de données)
 
 Pour paramétrer votre adresse gmail, modifiez cette ligne. Il suffit de remplacer ADRESS et PASSWORD par votre adresse gmail et le mot de passe correspondant.
 
-    ## MAILER_DSN=smtp://ADRESS:PASSWORD@smtp.gmail.com?verify_peer=0
+    # MAILER_DSN=smtp://ADRESS:PASSWORD@smtp.gmail.com?verify_peer=0
 
 Si vous voulez utiliser un autre smtp que celui de gmail il vous faudra l'installer avec composer, vous trouvez dans ce lien les commandes permettant d'installer ces smtp:
 
