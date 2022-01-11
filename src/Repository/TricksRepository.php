@@ -49,7 +49,7 @@ class TricksRepository extends ServiceEntityRepository
     */
 
     /**
-     * Returns all Tricks per page
+     * Returns all Tricks per page and user
      * @return void 
      */
     public function getPaginateTricks($page, $limit, $id){
@@ -65,7 +65,7 @@ class TricksRepository extends ServiceEntityRepository
     }
 
     /**
-     * Returns all Tricks per page
+     * Count all Tricks per page and user
      * @return void 
      */
     public function getTotalTricks($id){
@@ -74,6 +74,32 @@ class TricksRepository extends ServiceEntityRepository
             ->where('a.isActiveTrick = 1')
             ->andWhere('a.user = :id')
             ->setParameter(':id', $id)
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Returns all Tricks per page and user
+     * @return void 
+     */
+    public function getPaginateTricksAdmin($page, $limit){
+        $query = $this->createQueryBuilder('a')
+            ->where('a.isActiveTrick = 1')
+            ->orderBy('a.dateUpdateTrick', 'DESC')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Count all Tricks per page and user
+     * @return void 
+     */
+    public function getTotalTricksAdmin(){
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.isActiveTrick = 1')
         ;
         return $query->getQuery()->getSingleScalarResult();
     }

@@ -62,12 +62,12 @@ class Tricks
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="Tricks", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="Tricks", orphanRemoval=true, cascade={"persist"})
      */
     private $videos;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="Tricks", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="Tricks", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
 

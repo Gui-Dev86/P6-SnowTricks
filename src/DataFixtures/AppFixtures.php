@@ -22,11 +22,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
         $faker = \Faker\Factory::create('FR-fr');
-
         $users = [];
         $categories = [];
         $categoriesName = ['Grab', 'Rotation', 'Flip', 'Rotation désaxée', 'Slide', 'One foot trick', 'Old school'];
@@ -62,17 +58,14 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             $users[] = $user;
         }
-
         // create 7 fake categories
         foreach ($categoriesName as $categoryName)
         {
             $category = new Categories();
             $category->setNameCat($categoryName);
-
             $manager->persist($category);
             $categories[] = $category;
         }
-
         // create 10 fake tricks
         foreach ($tricksName as $trickName)
         {
@@ -93,7 +86,6 @@ class AppFixtures extends Fixture
                 $image = new Image();
                 $image->setPathImage('img/upload/'. $trick->getTitleTrick(). '_' . $k . '.jpg')
                       ->setTricks($trick);
-                
                 $manager->persist($image);
             }
 
@@ -103,7 +95,6 @@ class AppFixtures extends Fixture
                 $video = new Video();
                 $video->setlinkVideo('https://www.youtube.com/embed/_Qq-YoXwNQY')
                     ->setTricks($trick);
-                
                 $manager->persist($video);
             }
 
@@ -116,7 +107,6 @@ class AppFixtures extends Fixture
                         ->setIsActiveCom(true)
                         ->setUser($faker->randomElement($users))
                         ->setTricks($trick);
-                
                 $manager->persist($comment);
             }               
         }

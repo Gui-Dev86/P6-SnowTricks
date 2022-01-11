@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row justify-content-center mt-5">         
+            <div class="col-12">
+                <h1 class="mb-5 text-center">Supprimer des images</h1>
+                
+                <div class="row justify-content-center">   
+                    <div class="col-10 col-md-6">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% if trick.images | length > 0  %}
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="titleMedias">
+                                        <h4 class="pl-3">Nos images</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% for image in trick.images %}
+                                    <div class="col-6 mb-3">
+                                        <a class="mb-2" href="{{ asset(image.pathImage) }}"><img class="mediasDelete" src="{{ asset(image.pathImage) }}" alt="photo snowboarder"></a>
+                                        <div class="text-center">
+                                            <a class="mediasDelete linkDeleteMedias mb-3" href="{{ path('deleteImage', {'id': trick.id}) }}?image={{ image.id }}">Supprimer</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="container col-12">
+                                <div class="col-12">
+                                    <p class="font-weight-bold text-center">Il n'y a pas d'image disponible pour ce trick.</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

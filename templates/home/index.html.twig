@@ -33,9 +33,9 @@
                                     </p>
                                     <div class="flex mb-2">
                                         <a class="font-weight-bold linkFigure mr-4" href="{{ path('trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
-                                    {% if (app.user) and ((trick.user.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
-                                        <a class="iconeHome mb-2" href="{{ path('modifyTrick') }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
-                                        <a class="iconeHome mb-2 mr-2" href=""><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
+                                    {% if (app.user) and app.user.isActive == 1 and ((trick.user.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
+                                        <a class="iconeHome mb-2" href="{{ path('modifyTrick', {'id': trick.id}) }}"><img class="card-img-top rounded-top" src="img/crayon.png"></a>
+                                        <a class="iconeHome mb-2 mr-2" href="{{ path('deleteTrick', {'id': trick.id}) }}"><img class="card-img-top rounded-top" src="img/poubelle.png"></a>
                                     {% endif %}
                                     </div>
                                 </div>
@@ -46,11 +46,12 @@
                 {% endfor %}
                 
             </div>
-            
-            <div class="mt-4 text-center">
-                <button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger tricks suivant</button>
-                <button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
-            </div>
+            {% if tricks | length > 10 %}
+                <div class="mt-4 text-center">
+                    <button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger tricks suivant</button>
+                    <button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
+                </div>
+            {% endif %}
             
         </div>
         <div class="row">

@@ -7,56 +7,57 @@
         <div class="row justify-content-center mt-5">         
             <div class="col-10 col-md-6">
                 <h1 class="mb-5 text-center">Modifier la figure</h1>
-                
-                <form class="mb-4" action="/createFigure" method="post" enctype="multipart/form-data">
-
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {{ form_start(formModifyTrick) }}
                     <div class="form-group">
-                        <label for="title" class="labelForm">Titre</label>
-                        <input type="text" class="form-control"  id="title" name="title" value="{% if title is defined %} {{ title }} {% endif %}">
+                        <label for="title" class="labelForm">Modifier le nom</label>
+                        {{ form_widget(formModifyTrick.titleTrick) }}
+                        {{ form_errors(formModifyTrick.titleTrick) }}
                     </div>
 
                     <div class="form-group">
-                        <label for="content" class="labelForm">Contenu</label>
-                        <textarea type="text" class="form-control" rows="10" id="content" name="content">{% if content is defined %} {{ content }} {% endif %}</textarea>
+                        <label for="content" class="labelForm">Modifier la description</label>
+                        {{ form_widget(formModifyTrick.contentTrick) }}
+                        {{ form_errors(formModifyTrick.contentTrick) }}
                     </div>
                     <div class="form-group">
-                        <label for="uploadMainImage" class="labelForm">Image principale</label><br />
+                        <label for="uploadMainImage" class="labelForm">Ajouter/Modifier l'image principale</label><br />
                         <div class="btnValidate btnUpload">Upload
-                            <input type="file" class="hideUpload"
-                                id="uploadMainImage" name="uploadMainImage"
-                                accept="image/png, image/jpeg">
-                            </div>
+                            {{ form_widget(formModifyTrick.mainImage) }}
+                            {{ form_errors(formModifyTrick.mainImage) }}
+                        </div>
                     </div>
                     <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une image au format png ou jpeg</p>
                     <div class="form-group">
-                        <label for="uploadImage" class="labelForm">Gallerie d'images (facultatif)</label><br />
+                        <label for="uploadImage" class="labelForm">Ajouter des images</label><br />
                         <div class="btnValidate btnUpload">Upload
-                            <input type="file" multiple class="hideUpload"
-                                id="uploadImage" name="uploadImage"
-                                accept="image/png, image/jpeg">
+                            {{ form_widget(formModifyTrick.images) }}
+                            {{ form_errors(formModifyTrick.images) }}
                         </div>
                     </div>
                     <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une image au format png ou jpeg, vous pouvez en sélectionner plusieurs à la fois</p>
                     <div class="form-group">
-                        <label for="title" class="labelForm">Vidéo (facultatif)</label>
-                        <input type="text" class="form-control"  id="title" name="title" value="{% if upload is defined and type == 0 %} {{ path }} {% endif %}">
+                        <label for="title" class="labelForm">Ajouter une vidéo</label>
+                        {{ form_widget(formModifyTrick.videos) }}
+                        {{ form_errors(formModifyTrick.videos) }}
                     </div>
-                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une vidéo Youtube</p>
-                    <label for="category" class="labelForm">Catégorie</label><br />
-                    <select name="category" id="category">
-                        <option value="">Grab</option>
-                        <option value="">Rotation</option>
-                        <option value="">Flip</option>
-                        <option value="">Slide</option>
-                        <option value="">Rotation désaxée</option>
-                        <option value="">One foot tricks</option>
-                        <option value="">Old school</option>
-                    </select>
+                    <p class="font-weight-bold font-italic mb-3">**Attention à bien sélectionner une vidéo Youtube ou Dailymotion</p>
+                    
+                    <a class="linkDeleteMedias font-weight-bold" href="{{ path('listDeleteImages', {'id': trickId}) }}">Pour supprimer des images (cliquez ici)</a><br />
+                    <a class="linkDeleteMedias font-weight-bold" href="{{ path('listDeleteVideos', {'id': trickId}) }}">Pour supprimer des videos (cliquez ici)</a><br />
+
+                    <label for="category" class="labelForm mt-3">Modifier la catégorie</label><br />
+                        {{ form_widget(formModifyTrick.categories) }}
+                        {{ form_errors(formModifyTrick.categories) }}
                     <div class="form-group my-4 text-center">
                         <button type="submit" name="createFigure" class="btnValidate btnNewFigure mt-4 mb-3">Modifier</button>
                     </div>
-                </form>
+                {{ form_end(formModifyTrick) }}
             </div>
-        </div>
+        </div>   
     </main>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SnowTricks - Accès refusé{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row justify-content-center pt-5">
+            <img src="{{ asset('img/404.jpg') }}">
+        </div>
+        <div class="row justify-content-center pt-5">    
+            <h2>Désolé, la page demandée n'existe pas.</h2>
+        </div>
+        <div class="row justify-content-center pt-5">
+            <a href="{{ path('home') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+        </div>   
+    </main>
+{% endblock %}
