@@ -1,4 +1,4 @@
-## OpenclassRooms - Formation PHP/Symfony Projet 6 - Création ddu site SnowTricks
+## OpenclassRooms - Formation PHP/Symfony Projet 6 - Création du site SnowTricks
 
 Codacy
 
